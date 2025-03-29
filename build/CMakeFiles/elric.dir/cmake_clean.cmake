@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/elric.dir/link.d"
+  "CMakeFiles/elric.dir/src/engine/animation.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/animation.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/audio.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/audio.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/loader/ase/aseprite.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/loader/ase/aseprite.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/loader/ase/reader.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/loader/ase/reader.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/point.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/point.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/raw_text.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/raw_text.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/sdl_wrapper.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/sdl_wrapper.cpp.o.d"
+  "CMakeFiles/elric.dir/src/engine/texture.cpp.o"
+  "CMakeFiles/elric.dir/src/engine/texture.cpp.o.d"
+  "CMakeFiles/elric.dir/src/gate.cpp.o"
+  "CMakeFiles/elric.dir/src/gate.cpp.o.d"
+  "CMakeFiles/elric.dir/src/gate_adder.cpp.o"
+  "CMakeFiles/elric.dir/src/gate_adder.cpp.o.d"
+  "CMakeFiles/elric.dir/src/gate_manipulator.cpp.o"
+  "CMakeFiles/elric.dir/src/gate_manipulator.cpp.o.d"
+  "CMakeFiles/elric.dir/src/gate_packager.cpp.o"
+  "CMakeFiles/elric.dir/src/gate_packager.cpp.o.d"
+  "CMakeFiles/elric.dir/src/helper.cpp.o"
+  "CMakeFiles/elric.dir/src/helper.cpp.o.d"
+  "CMakeFiles/elric.dir/src/main.cpp.o"
+  "CMakeFiles/elric.dir/src/main.cpp.o.d"
+  "CMakeFiles/elric.dir/src/node_line_drawer.cpp.o"
+  "CMakeFiles/elric.dir/src/node_line_drawer.cpp.o.d"
+  "CMakeFiles/elric.dir/src/selection_box.cpp.o"
+  "CMakeFiles/elric.dir/src/selection_box.cpp.o.d"
+  "elric"
+  "elric.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/elric.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

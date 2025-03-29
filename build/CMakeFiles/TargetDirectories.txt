@@ -1,0 +1,3 @@
+/home/alaam/stuf/elric/build/CMakeFiles/elric.dir
+/home/alaam/stuf/elric/build/CMakeFiles/edit_cache.dir
+/home/alaam/stuf/elric/build/CMakeFiles/rebuild_cache.dir
