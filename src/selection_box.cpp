@@ -156,7 +156,7 @@ void SelectionBox::packageSelection() {
 	if (m_selection.size() <= 0) {
 		return;
 	}
-	g_uiActive = true;
+	//g_uiActive = true;
 	std::string name = "CUSTOM";
 	SDL_Color color = {255, 255, 255, 255};
 	std::shared_ptr<CustomGate> custom = std::make_shared<CustomGate>(m_selection, SDL_FRect{g_mousePos.x, g_mousePos.y}, name, color);

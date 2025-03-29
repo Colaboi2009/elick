@@ -106,6 +106,7 @@ int main() {
 
 				continue;
 			} else {
+			
 			}
             switch (e.type) {
                 case SDL_EVENT_MOUSE_BUTTON_DOWN: {
