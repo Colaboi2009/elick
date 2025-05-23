@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/alaam/stuf/elric/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

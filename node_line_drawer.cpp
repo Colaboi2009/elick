@@ -57,7 +57,7 @@ NodeLineDrawer::NodeLineDrawer() {}
 NodeLineDrawer::~NodeLineDrawer() {}
 
 void NodeLineDrawer::tintNodeOnMouse() {
-    for (auto g : g_gates) {
+    for (auto g : g_context.getGates()) {
         if (g->inputNodes().size() > 0) {
             for (Node &n : g->inputNodes()) {
                 n.c = {0, 0, 255, 255};
@@ -68,7 +68,7 @@ void NodeLineDrawer::tintNodeOnMouse() {
                 n.c = {0, 0, 255, 255};
             }
         }
-        if (pointInFRect(g_mousePos, g->pos())) {
+        if (pointInFRect(g_mousePos, g->renderpos())) {
             Node *n;
             if (g->onNode(g_mousePos, nullptr, nullptr, &n)) {
                 n->c = {30, 30, 30, 255};
@@ -77,37 +77,95 @@ void NodeLineDrawer::tintNodeOnMouse() {
     }
 }
 
-void NodeLineDrawer::update(Uint32 event) {
-    if (event == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-        m_mousePressPos = g_mousePos;
-    } else if (event == SDL_EVENT_MOUSE_BUTTON_UP) {
-        bool detected = false;
-        for (auto g : g_gates) {
-            if (!pointInFRect(g_mousePos, g->pos())) {
-                continue;
-            }
+void NodeLineDrawer::predictNodeNearMouse() {
+	if (!m_predictNode || !m_draggingNode) {
+		return;
+	}
 
-            detected = true;
-            bool isInput;
-            int index;
-            if (m_draggingNode) {
-                NodeLine &draggedNode = m_nodeLines[m_nodeLines.size() - 1];
-                if (!g->onNode(g_mousePos, &isInput, &draggedNode.toIndex, nullptr) || isInput == draggedNode.isInput) {
-                    continue;
-                }
-                draggedNode.to = g;
-                m_draggingNode = false;
-                draggedNode.complete = true;
-                if (draggedNode.isInput) {
-                    draggedNode.from.lock()->connectInput(draggedNode.to, draggedNode.fromIndex, draggedNode.toIndex);
-                } else {
-                    draggedNode.to.lock()->connectInput(draggedNode.from, draggedNode.toIndex, draggedNode.fromIndex);
-                }
-            } else if (g->onNode(g_mousePos, &isInput, &index, nullptr)) {
-                m_draggingNode = true;
-                m_nodeLines.push_back({g, index, isInput});
-            }
-        }
+	NodeLine &draggedNode = m_nodeLines[m_nodeLines.size() - 1];
+	float distance = 9'999'999;
+	for (auto g : g_gates) {
+		if (g == draggedNode.from.lock()) {
+			continue;
+		}
+		if (draggedNode.isInput) {
+			for (int i = 0; i < g->outputNodes().size(); i++) {
+				float d = sqrDist(g->outputNodes()[i].p, g_mousePos);
+				if (d < distance) {
+					distance = d;
+					draggedNode.to = g;
+					draggedNode.toIndex = i;
+				}
+			}
+		} else {
+			for (int i = 0; i < g->inputNodes().size(); i++) {
+				if (!g->inGates()[i].expired()) {
+					continue;
+				}
+				float d = sqrDist(g->inputNodes()[i].p, g_mousePos);
+				if (d < distance) {
+					distance = d;
+					draggedNode.to = g;
+					draggedNode.toIndex = i;
+				}
+			}
+		}
+	}
+	if (draggedNode.to.expired()) {
+		return;
+	}
+	if (!draggedNode.isInput) {
+		draggedNode.to.lock()->inputNodes()[draggedNode.toIndex].c = {30, 30, 30, 255};
+	} else {
+		draggedNode.to.lock()->outputNodes()[draggedNode.toIndex].c = {30, 30, 30, 255};
+	}
+}
+
+void NodeLineDrawer::update(SDL_Event e) {
+    if (e.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+        m_mousePressPos = g_mousePos;
+    } else if (e.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+        bool detected = false;
+
+		NodeLine &draggedNode = m_nodeLines[m_nodeLines.size() - 1];
+		if (m_predictNode) {
+			detected = true;
+			m_draggingNode = false;
+			draggedNode.complete = true;
+			if (draggedNode.isInput) {
+				draggedNode.from.lock()->connectInput(draggedNode.to, draggedNode.fromIndex, draggedNode.toIndex);
+			} else {
+				draggedNode.to.lock()->connectInput(draggedNode.from, draggedNode.toIndex, draggedNode.fromIndex);
+			}
+		} else {
+			for (auto g : g_gates) {
+				if (!pointInFRect(g_mousePos, g->pos())) {
+					continue;
+				}
+
+				detected = true;
+				bool isInput;
+				int index;
+				if (m_draggingNode) {
+					if (!g->onNode(g_mousePos, &isInput, &draggedNode.toIndex, nullptr) || isInput == draggedNode.isInput) {
+						continue;
+					}
+					draggedNode.to = g;
+					m_draggingNode = false;
+					draggedNode.complete = true;
+					if (draggedNode.isInput) {
+						draggedNode.from.lock()->connectInput(draggedNode.to, draggedNode.fromIndex, draggedNode.toIndex);
+					} else {
+						draggedNode.to.lock()->connectInput(draggedNode.from, draggedNode.toIndex, draggedNode.fromIndex);
+					}
+				} else if (g->onNode(g_mousePos, &isInput, &index, nullptr)) {
+					m_draggingNode = true;
+					m_nodeLines.push_back({g, index, isInput});
+				}
+				break;
+			}
+		}
+
         if (!detected && m_draggingNode) {
             m_nodeLines[m_nodeLines.size() - 1].drawnPositions.push_back(m_draggingFinalPos);
         }
@@ -122,11 +180,24 @@ void NodeLineDrawer::update(Uint32 event) {
                 }
             }
         }
-    }
-    m_draggingFinalPos = g_mousePos;
+    } else if (e.type == SDL_EVENT_KEY_DOWN  && m_draggingNode) {
+		if (e.key.key == ck_escape) {
+			m_draggingNode = false;
+			m_nodeLines.pop_back();
+		} else if (e.key.key == ck_predict_node) {
+			m_predictNode = true;
+		} else if (e.key.key == ck_delete_gate) {
+			deleteNodeLineAtCursor();
+		}
+	} else if (e.type == SDL_EVENT_KEY_UP && e.key.key == ck_predict_node) {
+		m_predictNode = false;
+	}
+	m_draggingFinalPos = g_mousePos;
 }
 
 void NodeLineDrawer::render() {
+	tintNodeOnMouse();
+	predictNodeNearMouse();
     for (int i = m_nodeLines.size() - 1; i >= 0; i--) {
         NodeLine &l = m_nodeLines[i];
         if (l.from.expired() || (l.to.expired() && l.complete)) {
@@ -172,13 +243,6 @@ void NodeLineDrawer::deleteNodeLineAtCursor() {
             m_nodeLines.erase(m_nodeLines.begin() + j);
             return;
         }
-    }
-}
-
-void NodeLineDrawer::cancelMovement() {
-    if (m_draggingNode) {
-        m_draggingNode = false;
-        m_nodeLines.pop_back();
     }
 }
 

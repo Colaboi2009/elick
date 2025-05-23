@@ -7,17 +7,63 @@
 #include <algorithm>
 #include <cassert>
 
-void Node::render() {
-	sdl.setColor(c);
-	sdl.drawCircle(c_radius, p.x, p.y);
+void Gate::InputNode::render() {
+    sdl.setColor(c);
+    sdl.drawCircle(Gate::c_node_radius, p.x, p.y);
 }
 
-Gate::Gate(SDL_FRect pos, int maxIn, int maxOut, std::string name, SDL_Color c) : m_pos{pos}, m_maxInput(maxIn), m_maxOutput(maxOut), m_name{name}, m_innerColor{c} {
-	m_inputNodePos.resize(m_maxInput);
-	m_in.resize(m_maxInput);
-	m_inIndices.resize(m_maxInput);
-	m_outputNodePos.resize(m_maxOutput);
-	m_state.resize(m_maxOutput);
+void Gate::InputNode::renderNodeLines() {
+    if (connected.expired()) {
+        return;
+    }
+
+    std::vector<SDL_FPoint> points;
+    points.push_back(p);
+    points.insert(points.end(), lineNodes.begin(), lineNodes.end());
+    points.push_back(connected.lock()->p);
+
+    sdl.setColor((state() ? SDL_Color(0, 255, 0, 255) : SDL_Color(255, 0, 0, 255)));
+    sdl.drawLines(points, 3);
+}
+
+void Gate::InputNode::setPos(float x, float y) {
+    SDL_FPoint delta = {x - p.x, y - p.y};
+    for (auto &l : lineNodes) {
+        l.x += delta.x;
+        l.y += delta.y;
+    }
+    p = {x, y};
+}
+
+void Gate::InputNode::move(float dx, float dy) {
+    p.x += dx;
+    p.y += dy;
+}
+
+void Gate::InputNode::moveAll(float dx, float dy) {
+    p.x += dx;
+    p.y += dy;
+    for (auto &l : lineNodes) {
+        l.x += dx;
+        l.y += dy;
+    }
+}
+
+void Gate::OutputNode::render() {
+    sdl.setColor(c);
+    sdl.drawCircle(Gate::c_node_radius, p.x, p.y);
+}
+
+Gate::Gate(SDL_FPoint pos, int maxIn, int maxOut, std::string name, SDL_Color c)
+    : m_maxInput(maxIn), m_maxOutput(maxOut), m_name{name}, m_innerColor{c} {
+    m_pos.x = pos.x;
+    m_pos.y = pos.y;
+}
+
+std::shared_ptr<Gate> Gate::init() {
+	SDL_Log("initing custom gate");
+    resetConnections();
+    return shared_from_this();
 }
 
 Gate::Gate(const Gate &other) {
@@ -25,190 +71,301 @@ Gate::Gate(const Gate &other) {
     m_inner = other.m_inner;
     m_innerColor = other.m_innerColor;
     m_name = other.m_name;
+
     m_maxInput = other.m_maxInput;
     m_maxOutput = other.m_maxOutput;
-    m_inputNodePos = other.m_inputNodePos;
-    m_outputNodePos = other.m_outputNodePos;
-    m_in = other.m_in;
-    m_inIndices = other.m_inIndices;
-    m_state = other.m_state;
+    m_inputNodes = other.m_inputNodes;
+    m_outputNodes = other.m_outputNodes;
+
     m_spriteDirty = true;
-
-	m_inputNodePos.resize(m_maxInput);
-	//m_in.clear();
-	m_in.resize(m_maxInput);
-	m_inIndices.resize(m_maxInput);
-	m_outputNodePos.resize(m_maxOutput);
-	m_state.resize(m_maxOutput);
 }
 
-Gate::~Gate() {
+Gate::~Gate() {}
+
+void Gate::move(float dx, float dy) {
+    m_pos.x += dx;
+    m_pos.y += dy;
+    for (auto n : m_inputNodes) {
+        n->move(dx, dy);
+    }
+    for (auto n : m_outputNodes) {
+        n->move(dx, dy);
+    }
 }
 
-bool Gate::onNode(SDL_FPoint mouseP, bool *isInput, int *index, Node **n) {
-	for (int i = 0; i < m_maxInput; i++) {
-		if (pointInCircle(mouseP, Node::c_radius, m_inputNodePos[i].p)) {
-			if (isInput) {
-				*isInput = true;
-			}
-			if (index) {
-				*index = i;
-			}
-			if (n) {
-				*n = &m_inputNodePos[i];
-			}
-			return true;
-		}
-	}
-	for (int i = 0; i < m_maxOutput; i++) {
-		if (pointInCircle(mouseP, Node::c_radius, m_outputNodePos[i].p)) {
-			if (isInput) {
-				*isInput = false;
-			}
-			if (index) {
-				*index = i;
-			}
-			if (n) {
-				*n = &m_outputNodePos[i];
-			}
-			return true;
-		}
-	}
-	return false;
+void Gate::moveAll(float dx, float dy) {
+    m_pos.x += dx;
+    m_pos.y += dy;
+    for (auto n : m_inputNodes) {
+        n->moveAll(dx, dy);
+    }
+    for (auto n : m_outputNodes) {
+        n->move(dx, dy);
+    }
+}
+
+void Gate::pos(float x, float y) {
+    m_pos.x = x;
+    m_pos.y = y;
+    for (auto n : m_inputNodes) {
+        n->setPos(x, y);
+    }
+    for (auto n : m_outputNodes) {
+        n->setPos(x, y);
+    }
+}
+
+void Gate::connectInput(std::weak_ptr<OutputNode> on, std::weak_ptr<InputNode> in, std::vector<SDL_FPoint> line) {
+    on.lock()->toGate = shared_from_this();
+    in.lock()->connected = on;
+    in.lock()->lineNodes = line;
+}
+
+void Gate::resetConnections() {
+    m_inputNodes.clear();
+    m_outputNodes.clear();
+    m_outputNodes.resize(m_maxOutput);
+    m_inputNodes.resize(m_maxInput);
+    for (int i = 0; i < m_maxInput; i++) {
+        m_inputNodes[i] = std::make_shared<InputNode>();
+        m_inputNodes[i]->owner = shared_from_this();
+    }
+    for (int i = 0; i < m_maxOutput; i++) {
+        m_outputNodes[i] = std::make_shared<OutputNode>();
+        m_outputNodes[i]->owner = shared_from_this();
+    }
+}
+
+std::weak_ptr<Gate::InputNode> Gate::inputNodeOnPos(SDL_FPoint p) {
+    for (auto n : m_inputNodes) {
+        if (pointInCircle(p, c_node_radius, n->p)) {
+            return n;
+        }
+    }
+    return std::weak_ptr<InputNode>();
+}
+
+std::weak_ptr<Gate::OutputNode> Gate::outputNodeOnPos(SDL_FPoint p) {
+    for (auto n : m_outputNodes) {
+        if (pointInCircle(p, c_node_radius, n->p)) {
+            return n;
+        }
+    }
+    return std::weak_ptr<OutputNode>();
 }
 
 void Gate::render() {
-	if (m_spriteDirty) {
-		createSprite();
-		m_spriteDirty = false;
-	}
+    if (m_spriteDirty) {
+        createSprite();
+        m_spriteDirty = false;
+    }
 
-	sdl.setColor(m_innerColor);
-	m_inner = m_pos;
-	m_inner.w -= 2.f * Node::c_radius + 2.f * c_outer_margin;
-	m_inner.h -= 2.f * c_outer_margin;
-	sdl.drawRectFilled(center(m_inner));
+    sdl.setColor(m_innerColor);
+    m_inner = m_pos;
+    m_inner.w -= 2.f * c_node_radius + 2.f * c_outer_margin;
+    m_inner.h -= 2.f * c_outer_margin;
+    sdl.drawRectFilled(center(m_inner));
 
-	const float node_input_height = Node::c_radius * 2.f * m_maxInput + c_node_spacing * (m_maxInput - 1);
-	const float node_left = -m_pos.w / 2.f + Node::c_radius + c_outer_margin;
-	for (int i = 0; i < m_maxInput; i++) {
-		m_inputNodePos[i].p = {m_pos.x + node_left, m_pos.y - node_input_height / 2.f + Node::c_radius + i * (Node::c_radius * 2.f + c_node_spacing)};
-		m_inputNodePos[i].render();
-	}
-	const float node_output_height = Node::c_radius * 2.f * m_maxOutput + c_node_spacing * (m_maxOutput - 1);
-	const float node_right = m_pos.w / 2.f - Node::c_radius - c_outer_margin;
-	for (int i = 0; i < m_maxOutput; i++) {
-		m_outputNodePos[i].p = {m_pos.x + node_right, m_pos.y - node_output_height / 2.f + Node::c_radius + i * (Node::c_radius * 2.f + c_node_spacing)};
-		m_outputNodePos[i].render();
-	}
+    const float node_input_height = c_node_radius * 2.f * m_maxInput + c_node_spacing * (m_maxInput - 1);
+    const float node_left = -m_pos.w / 2.f + c_node_radius + c_outer_margin;
+    for (int i = 0; i < m_maxInput; i++) {
+        m_inputNodes[i]->p = {m_pos.x + node_left,
+                              m_pos.y - node_input_height / 2.f + c_node_radius + i * (c_node_radius * 2.f + c_node_spacing)};
+        m_inputNodes[i]->render();
+    }
+    const float node_output_height = c_node_radius * 2.f * m_maxOutput + c_node_spacing * (m_maxOutput - 1);
+    const float node_right = m_pos.w / 2.f - c_node_radius - c_outer_margin;
+    for (int i = 0; i < m_maxOutput; i++) {
+        m_outputNodes[i]->p = {m_pos.x + node_right,
+                               m_pos.y - node_output_height / 2.f + c_node_radius + i * (c_node_radius * 2.f + c_node_spacing)};
+        m_outputNodes[i]->render();
+    }
 
-	m_text->render({m_pos.x, m_pos.y});
+    m_text->render({m_pos.x, m_pos.y});
+}
+
+void Gate::renderNodeLines() {
+    for (auto i : m_inputNodes) {
+        i->renderNodeLines();
+    }
 }
 
 void Gate::createSprite() {
-	const float node_input_height = Node::c_radius * 2.f * m_maxInput + c_node_spacing * (m_maxInput - 1);
-	const float node_output_height = Node::c_radius * 2.f * m_maxOutput + c_node_spacing * (m_maxOutput - 1);
-	m_pos.h = std::max({node_output_height, node_input_height, TTF_GetFontSize(g_font) + 3});
+    const float node_input_height = c_node_radius * 2.f * m_maxInput + c_node_spacing * (m_maxInput - 1);
+    const float node_output_height = c_node_radius * 2.f * m_maxOutput + c_node_spacing * (m_maxOutput - 1);
+    m_pos.h = std::max({node_output_height, node_input_height, TTF_GetFontSize(g_font) + 3});
 
-	TTF_GetFontSize(g_font);
-	m_text = std::make_unique<RawText>(m_name, SDL_Color(255, 255, 255, 255), g_font, m_pos.h);
-	m_pos.h += c_outer_margin;
-	m_pos.w = m_text->tex().w() + c_text_margin * 2.f + c_outer_margin;
+    std::string uppername;
+    for (auto &c : m_name) {
+        uppername += toupper(c);
+    }
+
+    TTF_GetFontSize(g_font);
+    m_text = std::make_unique<RawText>(uppername, SDL_Color(255, 255, 255, 255), g_font, m_pos.h);
+    m_pos.h += c_outer_margin;
+    m_pos.w = m_text->tex().w() + c_text_margin * 2.f + c_outer_margin;
 }
 
-CustomGate::CustomGate(std::vector<std::weak_ptr<Gate>> gates,SDL_FRect pos, std::string name, SDL_Color color) {
-	create(gates);
+std::vector<bool> Gate::states() const {
+    std::vector<bool> states(m_maxOutput);
+    for (int i = 0; i < m_maxOutput; i++) {
+        states[i] = state(i);
+    }
+    return states;
+}
 
-	m_pos = pos;
-	m_maxInput = m_inputs.size();
-	m_maxOutput = m_outputs.size();
-	m_name = name;
-	m_innerColor = color;
-	m_inputNodePos.resize(m_maxInput);
-	m_in.resize(m_maxInput);
-	m_inIndices.resize(m_maxInput);
-	m_outputNodePos.resize(m_maxOutput);
-	m_state.resize(m_maxOutput);
+void InputGate::electrify() { m_innerColor = {Uint8(m_outputNodes[0]->state ? 0 : 255), Uint8(m_outputNodes[0]->state ? 255 : 0), 0, 255}; }
+
+void OutputGate::electrify() {
+    m_innerColor = {Uint8(m_outputNodes[0]->state ? 0 : 255), Uint8(m_outputNodes[0]->state ? 255 : 0), 0, 255};
+    m_outputNodes[0]->state = m_inputNodes[0]->state();
+}
+
+void AndGate::electrify() { m_outputNodes[0]->state = m_inputNodes[0]->state() && m_inputNodes[1]->state(); }
+
+void NotGate::electrify() { m_outputNodes[0]->state = !m_inputNodes[0]->state(); }
+
+CustomGate::CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color) {
+    create(gates);
+
+    m_pos.x = pos.x;
+    m_pos.y = pos.y;
+    m_name = name;
+    m_innerColor = color;
+    m_maxInput = m_inputs.size();
+    m_maxOutput = m_outputs.size();
+	SDL_Log("custom gate init");
 }
 
 CustomGate::CustomGate(const CustomGate &other) : Gate(other) {
-	std::vector<std::weak_ptr<Gate>> gates;
-	gates.insert(gates.end(), other.m_inputs.begin(), other.m_inputs.end());
-	gates.insert(gates.end(), other.m_gates.begin(), other.m_gates.end());
-	gates.insert(gates.end(), other.m_outputs.begin(), other.m_outputs.end());
-	create(gates);
+    std::vector<std::weak_ptr<Gate>> gates;
+    gates.insert(gates.end(), other.m_inputs.begin(), other.m_inputs.end());
+    gates.insert(gates.end(), other.m_gates.begin(), other.m_gates.end());
+    gates.insert(gates.end(), other.m_outputs.begin(), other.m_outputs.end());
+    create(gates);
 
-	m_pos = other.m_pos;
-	m_inner = other.m_inner;
-	m_innerColor = other.m_innerColor;
-	m_name = other.m_name;
-	m_maxInput = other.m_maxInput;
-	m_maxOutput = other.m_maxOutput;
-	m_inputNodePos = other.m_inputNodePos;
-	m_outputNodePos = other.m_outputNodePos;
-	m_in = other.m_in;
-	m_inIndices = other.m_inIndices;
-	m_state = other.m_state;
-	m_spriteDirty = true;
+    m_pos = other.m_pos;
+    m_inner = other.m_inner;
+    m_innerColor = other.m_innerColor;
+    m_name = other.m_name;
+    m_maxInput = other.m_maxInput;
+    m_maxOutput = other.m_maxOutput;
+    m_outputNodes = other.m_outputNodes;
+    m_spriteDirty = true;
 
-	m_inputNodePos.resize(m_maxInput);
-	m_in.resize(m_maxInput);
-	m_inIndices.resize(m_maxInput);
-	m_outputNodePos.resize(m_maxOutput);
-	m_state.resize(m_maxOutput);
+    //resetConnections();
+
+    m_inputNodes = other.m_inputNodes;
+    m_outputNodes = other.m_outputNodes;
 }
 
 void CustomGate::electrify() {
-	for (int i = 0; i < m_inputs.size(); i++) {
-		m_inputs[i]->set(getState(m_in[i], m_inIndices[i]));
-	}
-	for (int i = 0; i < 100; i++) {
-		bool dirty = false;
-		for (auto g : m_gates) {
-			std::vector<bool> before = g->states();
-			g->electrify();
-			for (int i = 0; i < before.size(); i++) {
-				if (!dirty) {
-					dirty = before[i] != g->state(i);
-				} else {
-					break;
-				}
-			}
-		}
-		if (!dirty) {
-			break;
-		}
-	}
-	for (int i = 0; i < m_outputs.size(); i++) {
-		m_outputs[i]->electrify();
-		m_state[i] = m_outputs[i]->state(0);
-	}
+    for (int i = 0; i < m_inputs.size(); i++) {
+        m_inputs[i]->set(m_inputNodes[i]->state());
+    }
+    for (int i = 0; i < 100; i++) {
+        bool dirty = false;
+        for (auto g : m_gates) {
+            std::vector<bool> before = g->states();
+            g->electrify();
+            for (int i = 0; i < before.size(); i++) {
+                if (!dirty) {
+                    dirty = before[i] != g->state(i);
+                } else {
+                    break;
+                }
+            }
+        }
+        if (!dirty) {
+            break;
+        }
+    }
+    for (int i = 0; i < m_outputs.size(); i++) {
+        m_outputs[i]->electrify();
+        m_outputNodes[i]->state = m_outputs[i]->state(0);
+    }
+}
+
+std::vector<std::shared_ptr<Gate>> CustomGate::context() {
+    std::vector<std::shared_ptr<Gate>> gates;
+    gates.insert(gates.end(), m_inputs.begin(), m_inputs.end());
+    gates.insert(gates.end(), m_gates.begin(), m_gates.end());
+    gates.insert(gates.end(), m_outputs.begin(), m_outputs.end());
+    return gates;
 }
 
 void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
-	std::vector<std::shared_ptr<Gate>> allGates;
-	for (int i = 0; i < gates.size(); i++) {
-		auto _g = gates[i];
-		auto in = std::dynamic_pointer_cast<InputGate>(_g.lock());
-		auto out = std::dynamic_pointer_cast<OutputGate>(_g.lock());
-		std::shared_ptr<Gate> g = _g.lock()->copy();
-		if (in) {
-			m_inputs.push_back(std::dynamic_pointer_cast<InputGate>(g));
-		} else if (out) {
-			m_outputs.push_back(std::dynamic_pointer_cast<OutputGate>(g));
-		} else {
-			m_gates.push_back(g);
-		}
-		allGates.push_back(g);
-	}
-	for (auto g : allGates) {
-		for (int i = 0; i < g->inGates().size(); i++) {
-			for (int j = 0; j < gates.size(); j++) {
-				if (g->inGates()[i].lock() == gates[j].lock()) {
-					g->inGates()[i] = allGates[j];
-					break;
-				}
+    std::vector<std::shared_ptr<Gate>> allGates;
+    float totalX = 0;
+    float totalY = 0;
+    for (int i = 0; i < gates.size(); i++) {
+        auto _g = gates[i];
+        auto in = std::dynamic_pointer_cast<InputGate>(_g.lock());
+        auto out = std::dynamic_pointer_cast<OutputGate>(_g.lock());
+        std::shared_ptr<Gate> g = _g.lock()->copy();
+        if (in) {
+            m_inputs.push_back(std::dynamic_pointer_cast<InputGate>(g));
+        } else if (out) {
+            m_outputs.push_back(std::dynamic_pointer_cast<OutputGate>(g));
+        } else {
+            m_gates.push_back(g);
+        }
+        allGates.push_back(g);
+
+        totalX += _g.lock()->realpos().x;
+        totalY += _g.lock()->realpos().y;
+    }
+    float avX = totalX / gates.size();
+    float avY = totalY / gates.size();
+    for (auto g : allGates) {
+        for (int i = 0; i < std::max(g->maxOutput(), g->maxInput()); i++) {
+			if (i < g->maxInput()) {
+				g->getInputNode(i).lock()->owner = g;
+				SDL_Log("the input thing");
+				g->getInputNode(i).lock()->owner.lock();
+				SDL_Log("yea i did it cpp apparently is broken af");
 			}
-		}
-	}
+			if (i < g->maxOutput()) {
+				g->getOutputNode(i).lock()->owner = g;
+			}
+
+            for (int j = 0; j < gates.size(); j++) {
+				SDL_Log("hi %s %zu", gates[j].lock()->name().c_str(), g->maxInput());
+                if (i < g->maxOutput()) {
+					g->getOutputNode(i).lock()->owner = g->shared();
+					if (!g->getOutputNode(i).expired() && g->getOutputNode(i).lock()->toGate.lock() == gates[j].lock()) {
+						g->getOutputNode(i).lock()->toGate = allGates[j];
+					}
+                }
+				SDL_Log("Made the outputs");
+                if (i < g->maxInput()) {
+					SDL_Log("what the fuck");
+                    if (!g->getInputNode(i).lock()->connected.expired() && g->getInputNode(i).lock()->connected.lock()->owner.lock() == gates[j].lock()) {
+						SDL_Log("what in the bananas");
+						for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
+							SDL_Log("shitting on the banana");
+							if (g->getInputNode(i).lock()->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
+								g->getInputNode(i).lock()->connected = allGates[j]->getOutputNode(k);
+								SDL_Log("Swapped the connected gate");
+							}
+						}
+                    }
+					SDL_Log("index %i, max: %zu, bool: %b", i, g->maxInput(), i < g->maxInput());
+					SDL_Log("this is the problem isn't it; is expired: %b", g->getInputNode(i).expired());
+					g->getInputNode(i).lock()->owner.lock();
+					SDL_Log("sup");
+					g->shared();
+					SDL_Log("lmao");
+					g->getInputNode(i).lock()->owner = g->shared();
+					SDL_Log("sadge");
+                }
+				SDL_Log("made the inputs");
+				SDL_Log("Bye");
+            }
+        }
+        g->pos(g->realpos().x - avX / 2.f + 1920.f / 2.f, g->realpos().y - avY / 2.f + 1080.f / 2.f);
+    }
+	SDL_Log("Huh");
 }
+
+int CustomGate::rawGateCount() { return m_gates.size(); }

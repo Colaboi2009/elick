@@ -1,98 +1,98 @@
 [
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/animation.cpp.o -c /home/alaam/stuf/elric/src/engine/animation.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/animation.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/animation.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/animation.cpp.o -c /home/alaam/stuf/elric/include/engine/animation.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/animation.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/animation.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/audio.cpp.o -c /home/alaam/stuf/elric/src/engine/audio.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/audio.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/audio.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/audio.cpp.o -c /home/alaam/stuf/elric/include/engine/audio.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/audio.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/audio.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/loader/ase/aseprite.cpp.o -c /home/alaam/stuf/elric/src/engine/loader/ase/aseprite.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/loader/ase/aseprite.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/loader/ase/aseprite.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/loader/ase/aseprite.cpp.o -c /home/alaam/stuf/elric/include/engine/loader/ase/aseprite.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/loader/ase/aseprite.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/loader/ase/aseprite.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/loader/ase/reader.cpp.o -c /home/alaam/stuf/elric/src/engine/loader/ase/reader.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/loader/ase/reader.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/loader/ase/reader.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/loader/ase/reader.cpp.o -c /home/alaam/stuf/elric/include/engine/loader/ase/reader.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/loader/ase/reader.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/loader/ase/reader.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/point.cpp.o -c /home/alaam/stuf/elric/src/engine/point.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/point.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/point.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/point.cpp.o -c /home/alaam/stuf/elric/include/engine/point.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/point.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/point.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/raw_text.cpp.o -c /home/alaam/stuf/elric/src/engine/raw_text.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/raw_text.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/raw_text.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/raw_text.cpp.o -c /home/alaam/stuf/elric/include/engine/raw_text.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/raw_text.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/raw_text.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/sdl_wrapper.cpp.o -c /home/alaam/stuf/elric/src/engine/sdl_wrapper.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/sdl_wrapper.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/sdl_wrapper.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/sdl_wrapper.cpp.o -c /home/alaam/stuf/elric/include/engine/sdl_wrapper.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/sdl_wrapper.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/sdl_wrapper.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/engine/texture.cpp.o -c /home/alaam/stuf/elric/src/engine/texture.cpp",
-  "file": "/home/alaam/stuf/elric/src/engine/texture.cpp",
-  "output": "CMakeFiles/elric.dir/src/engine/texture.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/include/engine/texture.cpp.o -c /home/alaam/stuf/elric/include/engine/texture.cpp",
+  "file": "/home/alaam/stuf/elric/include/engine/texture.cpp",
+  "output": "CMakeFiles/elric.dir/include/engine/texture.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/gate.cpp.o -c /home/alaam/stuf/elric/src/gate.cpp",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/gate.cpp.o -c /home/alaam/stuf/elric/src/gate.cpp",
   "file": "/home/alaam/stuf/elric/src/gate.cpp",
   "output": "CMakeFiles/elric.dir/src/gate.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/gate_adder.cpp.o -c /home/alaam/stuf/elric/src/gate_adder.cpp",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/gate_adder.cpp.o -c /home/alaam/stuf/elric/src/gate_adder.cpp",
   "file": "/home/alaam/stuf/elric/src/gate_adder.cpp",
   "output": "CMakeFiles/elric.dir/src/gate_adder.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/gate_manipulator.cpp.o -c /home/alaam/stuf/elric/src/gate_manipulator.cpp",
-  "file": "/home/alaam/stuf/elric/src/gate_manipulator.cpp",
-  "output": "CMakeFiles/elric.dir/src/gate_manipulator.cpp.o"
-},
-{
-  "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/gate_packager.cpp.o -c /home/alaam/stuf/elric/src/gate_packager.cpp",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/gate_packager.cpp.o -c /home/alaam/stuf/elric/src/gate_packager.cpp",
   "file": "/home/alaam/stuf/elric/src/gate_packager.cpp",
   "output": "CMakeFiles/elric.dir/src/gate_packager.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/helper.cpp.o -c /home/alaam/stuf/elric/src/helper.cpp",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/helper.cpp.o -c /home/alaam/stuf/elric/src/helper.cpp",
   "file": "/home/alaam/stuf/elric/src/helper.cpp",
   "output": "CMakeFiles/elric.dir/src/helper.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/main.cpp.o -c /home/alaam/stuf/elric/src/main.cpp",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/main.cpp.o -c /home/alaam/stuf/elric/src/main.cpp",
   "file": "/home/alaam/stuf/elric/src/main.cpp",
   "output": "CMakeFiles/elric.dir/src/main.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/node_line_drawer.cpp.o -c /home/alaam/stuf/elric/src/node_line_drawer.cpp",
-  "file": "/home/alaam/stuf/elric/src/node_line_drawer.cpp",
-  "output": "CMakeFiles/elric.dir/src/node_line_drawer.cpp.o"
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/saver.cpp.o -c /home/alaam/stuf/elric/src/saver.cpp",
+  "file": "/home/alaam/stuf/elric/src/saver.cpp",
+  "output": "CMakeFiles/elric.dir/src/saver.cpp.o"
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
-  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -std=c++23 -o CMakeFiles/elric.dir/src/selection_box.cpp.o -c /home/alaam/stuf/elric/src/selection_box.cpp",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/selection_box.cpp.o -c /home/alaam/stuf/elric/src/selection_box.cpp",
   "file": "/home/alaam/stuf/elric/src/selection_box.cpp",
   "output": "CMakeFiles/elric.dir/src/selection_box.cpp.o"
+},
+{
+  "directory": "/home/alaam/stuf/elric/build",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/sim_context.cpp.o -c /home/alaam/stuf/elric/src/sim_context.cpp",
+  "file": "/home/alaam/stuf/elric/src/sim_context.cpp",
+  "output": "CMakeFiles/elric.dir/src/sim_context.cpp.o"
 }
 ]

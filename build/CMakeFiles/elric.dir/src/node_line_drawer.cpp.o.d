@@ -3,7 +3,7 @@ CMakeFiles/elric.dir/src/node_line_drawer.cpp.o: \
  /usr/include/stdc-predef.h \
  /home/alaam/stuf/elric/src/node_line_drawer.hpp \
  /home/alaam/stuf/elric/src/gate.hpp \
- /home/alaam/stuf/elric/src/engine/raw_text.hpp \
+ /home/alaam/stuf/elric/include/engine/raw_text.hpp \
  /usr/include/SDL3_ttf/SDL_ttf.h /usr/include/SDL3/SDL.h \
  /usr/include/SDL3/SDL_stdinc.h /usr/include/SDL3/SDL_platform_defines.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
@@ -145,7 +145,7 @@ CMakeFiles/elric.dir/src/node_line_drawer.cpp.o: \
  /usr/include/c++/14.2.1/bits/uses_allocator.h \
  /usr/include/c++/14.2.1/bits/uses_allocator_args.h \
  /usr/include/c++/14.2.1/tuple /usr/include/c++/14.2.1/bits/ranges_util.h \
- /home/alaam/stuf/elric/src/engine/texture.hpp \
+ /home/alaam/stuf/elric/include/engine/texture.hpp \
  /usr/include/c++/14.2.1/memory \
  /usr/include/c++/14.2.1/bits/stl_tempbuf.h \
  /usr/include/c++/14.2.1/bits/stl_uninitialized.h \
@@ -242,12 +242,25 @@ CMakeFiles/elric.dir/src/node_line_drawer.cpp.o: \
  /usr/include/c++/14.2.1/bits/out_ptr.h \
  /usr/include/c++/14.2.1/pstl/glue_memory_defs.h \
  /usr/include/c++/14.2.1/pstl/execution_defs.h \
- /home/alaam/stuf/elric/src/engine/point.hpp \
+ /home/alaam/stuf/elric/include/engine/point.hpp \
  /home/alaam/stuf/elric/src/helper.hpp /usr/include/c++/14.2.1/vector \
  /usr/include/c++/14.2.1/bits/stl_vector.h \
  /usr/include/c++/14.2.1/bits/stl_bvector.h \
  /usr/include/c++/14.2.1/bits/vector.tcc \
  /home/alaam/stuf/elric/src/globals.hpp \
- /home/alaam/stuf/elric/src/engine/sdl_wrapper.hpp \
+ /home/alaam/stuf/elric/include/engine/sdl_wrapper.hpp \
  /usr/include/SDL3_image/SDL_image.h \
- /home/alaam/stuf/elric/src/gate_packager.hpp
+ /home/alaam/stuf/elric/src/gate_packager.hpp \
+ /home/alaam/stuf/elric/src/keymap.hpp \
+ /home/alaam/stuf/elric/src/selection_box.hpp \
+ /home/alaam/stuf/elric/src/sim_context.hpp \
+ /usr/include/c++/14.2.1/functional \
+ /usr/include/c++/14.2.1/bits/std_function.h \
+ /usr/include/c++/14.2.1/unordered_map \
+ /usr/include/c++/14.2.1/bits/unordered_map.h \
+ /usr/include/c++/14.2.1/bits/hashtable.h \
+ /usr/include/c++/14.2.1/bits/hashtable_policy.h \
+ /usr/include/c++/14.2.1/bits/node_handle.h \
+ /usr/include/c++/14.2.1/bits/erase_if.h \
+ /usr/include/c++/14.2.1/bits/move_only_function.h \
+ /usr/include/c++/14.2.1/bits/mofunc_impl.h

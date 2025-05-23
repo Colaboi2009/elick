@@ -40,3 +40,11 @@ bool floatWithin(float start, float end, float x) {
 bool rectsOverlap(SDL_FRect r, SDL_FRect l) {
 	return !(r.x > (l.x + l.w) || l.x > (r.x + r.w) || r.y > (l.y + l.h) || l.y > (r.y + r.h));
 }
+
+bool operator==(SDL_FPoint r, SDL_FPoint l) {
+	return r.x == l.x && r.y == l.y;
+}
+
+SDL_FPoint rectToPoint(SDL_FRect r) {
+	return {r.x, r.y};
+}

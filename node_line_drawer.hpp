@@ -23,7 +23,10 @@ class NodeLineDrawer {
 	SDL_FPoint m_draggingFinalPos;
 	SDL_FPoint m_mousePressPos;
 
+	bool m_predictNode{false};
+
     void tintNodeOnMouse();
+	void predictNodeNearMouse();
 
   public:
     NodeLineDrawer();
@@ -31,12 +34,11 @@ class NodeLineDrawer {
 
 	bool dragging() const { return m_draggingNode; };
 
-    void update(Uint32);
+    void update(SDL_Event);
 	void render();
 	
 	void moveAll(float dx, float dy);
 
 	void deleteNodeLineAtCursor();
-    void cancelMovement();
 	void straightenLineWithMouseAxis();
 };

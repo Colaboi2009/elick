@@ -5,16 +5,42 @@
 #include <memory>
 #include <vector>
 
-struct Node {
-    static constexpr float c_radius = 10;
-    SDL_Color c{0, 0, 255, 255};
-    SDL_FPoint p;
-    std::string name{""};
+class Gate : public std::enable_shared_from_this<Gate> {
+  public:
+    struct OutputNode {
+        SDL_FPoint p;
 
-    void render();
-};
+        bool state;
 
-class Gate {
+        std::weak_ptr<Gate> owner;
+        std::weak_ptr<Gate> toGate;
+
+        SDL_Color c{0, 0, 255, 255};
+        std::string name{"Output"};
+
+        void render();
+		void move(float dx, float dy) { p = {p.x + dx, p.y + dy}; }
+		void setPos(float x, float y) { p = {x, y}; }
+    };
+    struct InputNode {
+        SDL_FPoint p;
+
+        std::weak_ptr<Gate> owner;
+        std::weak_ptr<OutputNode> connected;
+
+        std::vector<SDL_FPoint> lineNodes;
+        SDL_Color c{0, 0, 255, 255};
+        std::string name{"Input"};
+
+        bool state() const { return connected.expired() ? false : connected.lock()->state; }
+		void move(float dx, float dy);
+		void moveAll(float dx, float dy);
+		void setPos(float x, float y);
+
+        void render();
+		void renderNodeLines();
+    };
+
   protected:
     SDL_FRect m_pos;
 
@@ -26,104 +52,115 @@ class Gate {
 
     int m_maxInput;
     int m_maxOutput;
-    std::vector<Node> m_inputNodePos;
-    std::vector<Node> m_outputNodePos;
-    std::vector<std::weak_ptr<Gate>> m_in;
-    std::vector<int> m_inIndices;
-
-    std::vector<bool> m_state{};
+    std::vector<std::shared_ptr<InputNode>> m_inputNodes;
+    std::vector<std::shared_ptr<OutputNode>> m_outputNodes;
 
     bool m_spriteDirty{true};
     void createSprite();
 
+    std::shared_ptr<Gate> init();
+
   public:
-	Gate() {}
-    Gate(SDL_FRect pos, int maxIn, int maxOut, std::string name, SDL_Color);
+    Gate() {}
+    Gate(SDL_FPoint pos, int maxIn, int maxOut, std::string name, SDL_Color);
     Gate(const Gate &other);
     ~Gate();
-
-	virtual std::shared_ptr<Gate> copy() const { return std::make_shared<Gate>(*this); }
-
-    bool state(int i) const { return m_state[i]; }
-    const std::vector<bool> &states() const { return m_state; }
-    std::string name() const { return m_name; }
-    std::vector<Node> &inputNodes() { return m_inputNodePos; }
-    std::vector<Node> &outputNodes() { return m_outputNodePos; }
-    std::vector<std::weak_ptr<Gate>> &inGates() { return m_in; }
-    SDL_FPoint getNodePos(int index, bool input) { return input ? m_inputNodePos[index].p : m_outputNodePos[index].p; }
-
-    SDL_FRect pos() { return center(m_pos); }
-    SDL_FRect realpos() { return m_pos; }
-    SDL_FRect inner() { return m_inner; }
-
-    void move(float dx, float dy) { m_pos = {m_pos.x + dx, m_pos.y + dy, m_pos.w, m_pos.h}; }
-    void pos(float x, float y) { m_pos = {x, y, m_pos.w, m_pos.h}; }
-
-    void connectInput(std::weak_ptr<Gate> g, int i, int node) {
-        m_in[i] = g;
-        m_inIndices[i] = node;
+    static std::shared_ptr<Gate> make(SDL_FPoint pos, int maxIn, int maxOut, std::string name, SDL_Color c) {
+        return std::make_shared<Gate>(pos, maxIn, maxOut, name, c)->init();
     }
-	void resetConnections() {
-		m_in.clear();
-		m_inIndices.clear();
-		m_in.resize(m_maxInput);
-		m_inIndices.resize(m_maxInput);
-	}
-    void removeConnection(int i) { m_in[i].reset(); }
 
-    bool onNode(SDL_FPoint, bool *isInput, int *index, Node **);
+    virtual std::shared_ptr<Gate> copy() const { return std::make_shared<Gate>(*this); }
+    virtual std::shared_ptr<Gate> shared() { return shared_from_this(); }
+
+    std::string name() const { return m_name; }
+    size_t maxInput() const { return m_maxInput; }
+    size_t maxOutput() const { return m_maxOutput; }
+
+    SDL_FRect inner() { return m_inner; }
+    SDL_Color color() { return m_innerColor; }
+
+    SDL_FRect renderpos() { return center(m_pos); }
+    SDL_FRect realpos() { return m_pos; }
+    void move(float dx, float dy);
+	void moveAll(float dx, float dy);
+    void pos(float x, float y);
+
+    bool state(int i) const { return m_outputNodes[i]->state; }
+    std::vector<bool> states() const;
+
+    void connectInput(std::weak_ptr<OutputNode>, std::weak_ptr<InputNode>, std::vector<SDL_FPoint> line);
+    void removeInputConnection(int i) { m_inputNodes[i]->connected.reset(); }
+    void removeOutputConnection(int i) { m_outputNodes[i]->toGate.reset(); }
+    void resetConnections();
+
+    std::weak_ptr<InputNode> inputNodeOnPos(SDL_FPoint);
+    std::weak_ptr<OutputNode> outputNodeOnPos(SDL_FPoint);
+    SDL_FPoint getInputNodePos(int i) const { return m_inputNodes[i]->p; }
+    SDL_FPoint getOutputNodePos(int i) const { return m_outputNodes[i]->p; }
+    std::weak_ptr<InputNode> getInputNode(int i) const { return m_inputNodes[i]; }
+    std::weak_ptr<OutputNode> getOutputNode(int i) const { return m_outputNodes[i]; }
 
     virtual void electrify() {};
     void render();
+	void renderNodeLines();
 
   public:
+    static constexpr float c_node_radius = 5;
     static constexpr float c_node_spacing = 7;
     static constexpr float c_text_margin = 25;
     static constexpr float c_outer_margin = 5;
     static constexpr SDL_Color c_outerColor = {20, 20, 20, 255};
 };
 
-static bool getState(std::weak_ptr<Gate> g, int i) {
-    std::shared_ptr<Gate> gS = g.lock();
-    bool is = gS == nullptr ? false : gS->state(i);
-    return is;
-}
-
 class InputGate : public Gate {
   public:
-    InputGate(SDL_FRect pos) : Gate(pos, 0, 1, "Input", {0, 0, 0, 0}) {}
+    InputGate(SDL_FPoint pos) : Gate(pos, 0, 1, "I", {0, 0, 0, 0}) {}
+    static std::shared_ptr<InputGate> make(SDL_FPoint pos) {
+        return std::dynamic_pointer_cast<InputGate>(std::make_shared<InputGate>(pos)->init());
+    }
     InputGate(const InputGate &other) : Gate(other) {}
-	std::shared_ptr<Gate> copy() const override { return std::make_shared<InputGate>(*this); }
-    void set(bool b) { m_state[0] = b; }
-    void flip() { m_state[0] = !m_state[0]; }
-    void electrify() override { m_innerColor = {Uint8(m_state[0] ? 0 : 255), Uint8(m_state[0] ? 255 : 0), 0, 255}; }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<InputGate>(*this); }
+    std::shared_ptr<Gate> shared() override { return std::make_shared<InputGate>(*this); }
+    void set(bool b) { m_outputNodes[0]->state = b; }
+    void flip() { m_outputNodes[0]->state = !m_outputNodes[0]->state; }
+    void electrify() override;
 };
 
 class OutputGate : public Gate {
   public:
-    OutputGate(SDL_FRect pos) : Gate(pos, 1, 1, "Output", {0, 0, 0, 0}) {}
-    OutputGate(const OutputGate &other) : Gate(other) {}
-	std::shared_ptr<Gate> copy() const override { return std::make_shared<OutputGate>(*this); }
-    void electrify() override {
-        m_innerColor = {Uint8(m_state[0] ? 0 : 255), Uint8(m_state[0] ? 255 : 0), 0, 255};
-        m_state[0] = getState(m_in[0], m_inIndices[0]);
+    OutputGate(SDL_FPoint pos) : Gate(pos, 1, 1, "O", {0, 0, 0, 0}) {}
+    static std::shared_ptr<OutputGate> make(SDL_FPoint pos) {
+        return std::dynamic_pointer_cast<OutputGate>(std::make_shared<OutputGate>(pos)->init());
     }
+    OutputGate(const OutputGate &other) : Gate(other) {}
+
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<OutputGate>(*this); }
+    std::shared_ptr<Gate> shared() override { return std::make_shared<OutputGate>(*this); }
+    void electrify() override;
 };
 
 class AndGate : public Gate {
   public:
-    AndGate(SDL_FRect pos) : Gate(pos, 2, 1, "And", {180, 180, 255, 255}) {}
+    AndGate(SDL_FPoint pos) : Gate(pos, 2, 1, "and", {180, 180, 255, 255}) {}
+    static std::shared_ptr<AndGate> make(SDL_FPoint pos) {
+        return std::dynamic_pointer_cast<AndGate>(std::make_shared<AndGate>(pos)->init());
+    }
     AndGate(const AndGate &other) : Gate(other) {}
-	std::shared_ptr<Gate> copy() const override { return std::make_shared<AndGate>(*this); }
-    void electrify() override { m_state[0] = getState(m_in[0], m_inIndices[0]) && getState(m_in[1], m_inIndices[0]); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<AndGate>(*this); }
+    std::shared_ptr<Gate> shared() override { return std::make_shared<AndGate>(*this); }
+    void electrify() override;
 };
 
 class NotGate : public Gate {
   public:
-    NotGate(SDL_FRect pos) : Gate(pos, 1, 1, "Not", {255, 30, 30, 255}) {}
+    NotGate(SDL_FPoint pos) : Gate(pos, 1, 1, "not", {255, 30, 30, 255}) {}
+    static std::shared_ptr<NotGate> make(SDL_FPoint pos) {
+        return std::dynamic_pointer_cast<NotGate>(std::make_shared<NotGate>(pos)->init());
+    }
     NotGate(const NotGate &other) : Gate(other) {}
-	std::shared_ptr<Gate> copy() const override { return std::make_shared<NotGate>(*this); }
-    void electrify() override { m_state[0] = !getState(m_in[0], m_inIndices[0]); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<NotGate>(*this); }
+    std::shared_ptr<Gate> shared() override { return std::make_shared<NotGate>(*this); }
+    void electrify() override;
 };
 
 class CustomGate : public Gate {
@@ -132,11 +169,18 @@ class CustomGate : public Gate {
     std::vector<std::shared_ptr<InputGate>> m_inputs;
     std::vector<std::shared_ptr<OutputGate>> m_outputs;
 
-	void create(std::vector<std::weak_ptr<Gate>>&);
+    void create(std::vector<std::weak_ptr<Gate>> &);
+
   public:
-    CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FRect pos, std::string name, SDL_Color color);
+    CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color);
+    static std::shared_ptr<CustomGate> make(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color) {
+        return std::dynamic_pointer_cast<CustomGate>(std::make_shared<CustomGate>(gates, pos, name, color)->init());
+    }
     CustomGate(const CustomGate &other);
-	std::shared_ptr<Gate> copy() const override { return std::make_shared<CustomGate>(*this); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<CustomGate>(*this); }
+    std::shared_ptr<Gate> shared() override { return std::make_shared<CustomGate>(*this); }
 
     void electrify() override;
+    std::vector<std::shared_ptr<Gate>> context();
+	int rawGateCount();
 };

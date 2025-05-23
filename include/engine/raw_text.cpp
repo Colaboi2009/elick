@@ -18,10 +18,14 @@ RawText::~RawText() {
 }
 
 void RawText::render(SDL_FRect r) {
+	if (m_alignLeft) {
+		r.x += m_texture.w() / 2.f;
+	}
 	m_texture.render(r);
 }
 
-void RawText::Render(std::string str, SDL_FRect r, SDL_Color c, TTF_Font *font) {
+void RawText::Render(std::string str, SDL_FRect r, bool alignLeft, SDL_Color c, TTF_Font *font) {
 	RawText t{str, c, font};
+	t.alignLeft(alignLeft);
 	t.render(r);
 }

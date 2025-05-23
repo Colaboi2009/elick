@@ -2,8 +2,8 @@ CMakeFiles/elric.dir/src/helper.cpp.o: \
  /home/alaam/stuf/elric/src/helper.cpp /usr/include/stdc-predef.h \
  /home/alaam/stuf/elric/src/helper.hpp /usr/include/SDL3/SDL_rect.h \
  /usr/include/SDL3/SDL_stdinc.h /usr/include/SDL3/SDL_platform_defines.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdint.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdarg.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
@@ -13,7 +13,7 @@ CMakeFiles/elric.dir/src/helper.cpp.o: \
  /usr/include/bits/time64.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/stdint-least.h /usr/include/string.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stddef.h \
  /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/wchar.h /usr/include/bits/floatn.h \
  /usr/include/bits/floatn-common.h /usr/include/bits/types/wint_t.h \
@@ -21,11 +21,11 @@ CMakeFiles/elric.dir/src/helper.cpp.o: \
  /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
  /usr/include/bits/types/FILE.h /usr/include/SDL3/SDL_begin_code.h \
  /usr/include/SDL3/SDL_close_code.h /usr/include/SDL3/SDL_error.h \
- /usr/include/c++/14.2.1/cstdlib \
- /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
- /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
- /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
- /usr/include/c++/14.2.1/pstl/pstl_config.h /usr/include/stdlib.h \
+ /usr/include/c++/15.1.1/cstdlib \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
+ /usr/include/c++/15.1.1/pstl/pstl_config.h /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
  /usr/include/sys/types.h /usr/include/bits/types/clock_t.h \
  /usr/include/bits/types/clockid_t.h /usr/include/bits/types/time_t.h \
@@ -40,4 +40,4 @@ CMakeFiles/elric.dir/src/helper.cpp.o: \
  /usr/include/bits/pthreadtypes-arch.h \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h /usr/include/c++/14.2.1/bits/std_abs.h
+ /usr/include/bits/stdlib-float.h /usr/include/c++/15.1.1/bits/std_abs.h

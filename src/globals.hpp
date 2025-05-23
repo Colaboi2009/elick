@@ -4,13 +4,23 @@
 #include "engine/raw_text.hpp"
 #include "gate.hpp"
 #include "gate_packager.hpp"
+#include "keymap.hpp"
+#include "selection_box.hpp"
+#include "sim_context.hpp"
+
+#include <functional>
+#include <unordered_map>
 
 extern SDL sdl;
 extern TTF_Font *g_font;
-extern std::vector<std::shared_ptr<Gate>> g_gates;
 extern SDL_FPoint g_mousePos;
 extern SDL_FPoint g_prevMousePos;
 extern bool g_uiActive;
-extern GatePackager g_gatePackager;
+extern float g_dmouseX;
+extern float g_dmouseY;
 
-#define TEXT(text, x, y) RawText::Render(text, {x, y}, {255, 255, 255, 255}, g_font)
+extern SimContext g_context;
+extern GatePackager g_gatePackager;
+extern SelectionBox g_selectionBox;
+
+#define TEXT(text, x, y) RawText::Render(text, {x, y}, true, {255, 255, 255, 255}, g_font)

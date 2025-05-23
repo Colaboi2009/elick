@@ -5,6 +5,14 @@ PROJECT := "elric"
 compile:
 	@mkdir -p build \
 		&& cd build \
+		&& cmake -S ../ -B . -DCMAKE_BUILD_TYPE=Debug \
+		&& make \
+		&& cd .. \
+		&& cp build/$(PROJECT) . \
+
+release:
+	@mkdir -p build \
+		&& cd build \
 		&& cmake -S ../ -B . \
 		&& make \
 		&& cd .. \
