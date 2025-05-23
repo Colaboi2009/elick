@@ -61,7 +61,6 @@ Gate::Gate(SDL_FPoint pos, int maxIn, int maxOut, std::string name, SDL_Color c)
 }
 
 std::shared_ptr<Gate> Gate::init() {
-	SDL_Log("initing custom gate");
     resetConnections();
     return shared_from_this();
 }
@@ -236,7 +235,6 @@ CustomGate::CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, s
     m_innerColor = color;
     m_maxInput = m_inputs.size();
     m_maxOutput = m_outputs.size();
-	SDL_Log("custom gate init");
 }
 
 CustomGate::CustomGate(const CustomGate &other) : Gate(other) {
@@ -320,34 +318,34 @@ void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
     float avX = totalX / gates.size();
     float avY = totalY / gates.size();
     for (auto g : allGates) {
-        for (int i = 0; i < std::max(g->maxOutput(), g->maxInput()); i++) {
-			if (i < g->maxInput()) {
-				g->getInputNode(i).lock()->owner = g;
-				g->getInputNode(i).lock()->owner.lock();
+		for (int i = 0; i < g->maxOutput(); i++) {
+			auto outNode = g->getOutputNode(i).lock();
+			if (!outNode) {
+				continue;
 			}
-			if (i < g->maxOutput()) {
-				g->getOutputNode(i).lock()->owner = g;
-			}
-
+			outNode->owner = g;
             for (int j = 0; j < gates.size(); j++) {
-                if (i < g->maxOutput()) {
-					g->getOutputNode(i).lock()->owner = g->shared();
-					if (!g->getOutputNode(i).expired() && g->getOutputNode(i).lock()->toGate.lock() == gates[j].lock()) {
-						g->getOutputNode(i).lock()->toGate = allGates[j];
-					}
-                }
-                if (i < g->maxInput()) {
-                    if (!g->getInputNode(i).lock()->connected.expired() && g->getInputNode(i).lock()->connected.lock()->owner.lock() == gates[j].lock()) {
-						for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
-							if (g->getInputNode(i).lock()->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
-								g->getInputNode(i).lock()->connected = allGates[j]->getOutputNode(k);
-							}
+				if (outNode->toGate.lock() == gates[j].lock()) {
+					outNode->toGate = allGates[j];
+				}
+			}
+		}
+
+		for (int i = 0; i < g->maxInput(); i++) {
+			auto inNode = g->getInputNode(i).lock();
+			inNode->owner = g;
+            for (int j = 0; j < gates.size(); j++) {
+				if (!inNode->connected.expired() && inNode->connected.lock()->owner.lock() == gates[j].lock()) {
+					for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
+						if (inNode->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
+							inNode->connected = allGates[j]->getOutputNode(k);
 						}
-                    }
-					g->getInputNode(i).lock()->owner = g->shared();
-                }
-            }
-        }
+					}
+				}
+			}
+		}
+
+
         g->pos(g->realpos().x - avX / 2.f + 1920.f / 2.f, g->realpos().y - avY / 2.f + 1080.f / 2.f);
     }
 }
