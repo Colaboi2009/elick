@@ -226,7 +226,9 @@ void AndGate::electrify() { m_outputNodes[0]->state = m_inputNodes[0]->state() &
 void NotGate::electrify() { m_outputNodes[0]->state = !m_inputNodes[0]->state(); }
 
 CustomGate::CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color) {
+	float time = SDL_GetTicks();
     create(gates);
+	SDL_Log("time to make custom gate: %f", (SDL_GetTicks() - time));
 
     m_pos.x = pos.x;
     m_pos.y = pos.y;
@@ -321,51 +323,33 @@ void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
         for (int i = 0; i < std::max(g->maxOutput(), g->maxInput()); i++) {
 			if (i < g->maxInput()) {
 				g->getInputNode(i).lock()->owner = g;
-				SDL_Log("the input thing");
 				g->getInputNode(i).lock()->owner.lock();
-				SDL_Log("yea i did it cpp apparently is broken af");
 			}
 			if (i < g->maxOutput()) {
 				g->getOutputNode(i).lock()->owner = g;
 			}
 
             for (int j = 0; j < gates.size(); j++) {
-				SDL_Log("hi %s %zu", gates[j].lock()->name().c_str(), g->maxInput());
                 if (i < g->maxOutput()) {
 					g->getOutputNode(i).lock()->owner = g->shared();
 					if (!g->getOutputNode(i).expired() && g->getOutputNode(i).lock()->toGate.lock() == gates[j].lock()) {
 						g->getOutputNode(i).lock()->toGate = allGates[j];
 					}
                 }
-				SDL_Log("Made the outputs");
                 if (i < g->maxInput()) {
-					SDL_Log("what the fuck");
                     if (!g->getInputNode(i).lock()->connected.expired() && g->getInputNode(i).lock()->connected.lock()->owner.lock() == gates[j].lock()) {
-						SDL_Log("what in the bananas");
 						for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
-							SDL_Log("shitting on the banana");
 							if (g->getInputNode(i).lock()->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
 								g->getInputNode(i).lock()->connected = allGates[j]->getOutputNode(k);
-								SDL_Log("Swapped the connected gate");
 							}
 						}
                     }
-					SDL_Log("index %i, max: %zu, bool: %b", i, g->maxInput(), i < g->maxInput());
-					SDL_Log("this is the problem isn't it; is expired: %b", g->getInputNode(i).expired());
-					g->getInputNode(i).lock()->owner.lock();
-					SDL_Log("sup");
-					g->shared();
-					SDL_Log("lmao");
 					g->getInputNode(i).lock()->owner = g->shared();
-					SDL_Log("sadge");
                 }
-				SDL_Log("made the inputs");
-				SDL_Log("Bye");
             }
         }
         g->pos(g->realpos().x - avX / 2.f + 1920.f / 2.f, g->realpos().y - avY / 2.f + 1080.f / 2.f);
     }
-	SDL_Log("Huh");
 }
 
 int CustomGate::rawGateCount() { return m_gates.size(); }
