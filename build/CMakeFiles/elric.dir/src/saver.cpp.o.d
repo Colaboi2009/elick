@@ -250,8 +250,29 @@ CMakeFiles/elric.dir/src/saver.cpp.o: \
  /usr/include/c++/15.1.1/bits/istream.tcc \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/15.1.1/bits/fstream.tcc /usr/include/c++/15.1.1/cassert \
- /usr/include/assert.h /usr/include/c++/15.1.1/cmath /usr/include/math.h \
+ /usr/include/c++/15.1.1/bits/fstream.tcc \
+ /home/alaam/stuf/elric/src/globals.hpp \
+ /home/alaam/stuf/elric/include/engine/sdl_wrapper.hpp \
+ /usr/include/SDL3_image/SDL_image.h \
+ /home/alaam/stuf/elric/src/gate_packager.hpp \
+ /home/alaam/stuf/elric/src/keymap.hpp \
+ /home/alaam/stuf/elric/src/selection_box.hpp \
+ /home/alaam/stuf/elric/src/sim_context.hpp /usr/include/c++/15.1.1/map \
+ /usr/include/c++/15.1.1/bits/stl_tree.h \
+ /usr/include/c++/15.1.1/bits/node_handle.h \
+ /usr/include/c++/15.1.1/bits/stl_map.h \
+ /usr/include/c++/15.1.1/bits/stl_multimap.h \
+ /usr/include/c++/15.1.1/bits/erase_if.h \
+ /usr/include/c++/15.1.1/functional \
+ /usr/include/c++/15.1.1/bits/std_function.h \
+ /usr/include/c++/15.1.1/unordered_map \
+ /usr/include/c++/15.1.1/bits/unordered_map.h \
+ /usr/include/c++/15.1.1/bits/hashtable.h \
+ /usr/include/c++/15.1.1/bits/hashtable_policy.h \
+ /usr/include/c++/15.1.1/bits/move_only_function.h \
+ /usr/include/c++/15.1.1/bits/mofunc_impl.h \
+ /usr/include/c++/15.1.1/cassert /usr/include/assert.h \
+ /usr/include/c++/15.1.1/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \

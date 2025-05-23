@@ -283,13 +283,9 @@ void SelectionBox::packageSelection() {
     std::string name = "CUSTOM" + std::to_string(g_context.gateTypeCount());
     SDL_Color color = {255, 255, 255, 255};
     std::shared_ptr<CustomGate> custom = CustomGate::make(m_selection, g_mousePos, name, color);
-	SDL_Log("made the custom gate %s", name.c_str());
     deleteSelection();
-	SDL_Log("deleting selection");
     g_context.addNewGate(custom);
-	SDL_Log("adding the gate to the possible gates");
     g_context.makeGate(custom->name(), g_mousePos);
-	SDL_Log("made a copy to use");
 }
 
 void SelectionBox::duplicateSelection() {

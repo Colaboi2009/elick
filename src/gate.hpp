@@ -73,11 +73,15 @@ class Gate : public std::enable_shared_from_this<Gate> {
     virtual std::shared_ptr<Gate> shared() { return shared_from_this(); }
 
     std::string name() const { return m_name; }
+	void name(std::string n) { m_name = n; }
     size_t maxInput() const { return m_maxInput; }
     size_t maxOutput() const { return m_maxOutput; }
+	void setInputSize(int i) { m_maxInput = i; }
+	void setOutputSize(int i) { m_maxOutput = i; }
 
     SDL_FRect inner() { return m_inner; }
     SDL_Color color() { return m_innerColor; }
+	void color(SDL_Color c) { m_innerColor = c; }
 
     SDL_FRect renderpos() { return center(m_pos); }
     SDL_FRect realpos() { return m_pos; }
@@ -99,6 +103,8 @@ class Gate : public std::enable_shared_from_this<Gate> {
     SDL_FPoint getOutputNodePos(int i) const { return m_outputNodes[i]->p; }
     std::weak_ptr<InputNode> getInputNode(int i) const { return m_inputNodes[i]; }
     std::weak_ptr<OutputNode> getOutputNode(int i) const { return m_outputNodes[i]; }
+	int getInputNodeIndex(std::weak_ptr<InputNode>);
+	int getOutputNodeIndex(std::weak_ptr<OutputNode>);
 
     virtual void electrify() {};
     void render();
@@ -180,7 +186,8 @@ class CustomGate : public Gate {
     std::shared_ptr<Gate> copy() const override { return std::make_shared<CustomGate>(*this); }
     std::shared_ptr<Gate> shared() override { return std::make_shared<CustomGate>(*this); }
 
+	int rawGateCount() const { return m_gates.size(); }
+
     void electrify() override;
     std::vector<std::shared_ptr<Gate>> context();
-	int rawGateCount();
 };

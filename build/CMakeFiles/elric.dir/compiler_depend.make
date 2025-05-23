@@ -2427,9 +2427,12 @@ CMakeFiles/elric.dir/src/gate.cpp.o: /home/alaam/stuf/elric/src/gate.cpp \
   /usr/include/c++/15.1.1/bits/stl_iterator.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_types.h \
+  /usr/include/c++/15.1.1/bits/stl_map.h \
+  /usr/include/c++/15.1.1/bits/stl_multimap.h \
   /usr/include/c++/15.1.1/bits/stl_pair.h \
   /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
   /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
+  /usr/include/c++/15.1.1/bits/stl_tree.h \
   /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
   /usr/include/c++/15.1.1/bits/stl_vector.h \
   /usr/include/c++/15.1.1/bits/streambuf.tcc \
@@ -2471,6 +2474,7 @@ CMakeFiles/elric.dir/src/gate.cpp.o: /home/alaam/stuf/elric/src/gate.cpp \
   /usr/include/c++/15.1.1/initializer_list \
   /usr/include/c++/15.1.1/ios \
   /usr/include/c++/15.1.1/iosfwd \
+  /usr/include/c++/15.1.1/map \
   /usr/include/c++/15.1.1/memory \
   /usr/include/c++/15.1.1/new \
   /usr/include/c++/15.1.1/numbers \
@@ -2768,6 +2772,7 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
   /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/saver.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -2948,6 +2953,7 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/bits/exception_defines.h \
   /usr/include/c++/15.1.1/bits/exception_ptr.h \
   /usr/include/c++/15.1.1/bits/formatfwd.h \
+  /usr/include/c++/15.1.1/bits/fstream.tcc \
   /usr/include/c++/15.1.1/bits/functexcept.h \
   /usr/include/c++/15.1.1/bits/functional_hash.h \
   /usr/include/c++/15.1.1/bits/hash_bytes.h \
@@ -2955,6 +2961,7 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/bits/hashtable_policy.h \
   /usr/include/c++/15.1.1/bits/invoke.h \
   /usr/include/c++/15.1.1/bits/ios_base.h \
+  /usr/include/c++/15.1.1/bits/istream.tcc \
   /usr/include/c++/15.1.1/bits/iterator_concepts.h \
   /usr/include/c++/15.1.1/bits/locale_classes.h \
   /usr/include/c++/15.1.1/bits/locale_classes.tcc \
@@ -2975,6 +2982,7 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/bits/new_allocator.h \
   /usr/include/c++/15.1.1/bits/node_handle.h \
   /usr/include/c++/15.1.1/bits/ostream.h \
+  /usr/include/c++/15.1.1/bits/ostream.tcc \
   /usr/include/c++/15.1.1/bits/ostream_insert.h \
   /usr/include/c++/15.1.1/bits/out_ptr.h \
   /usr/include/c++/15.1.1/bits/postypes.h \
@@ -3004,9 +3012,12 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/bits/stl_iterator.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_types.h \
+  /usr/include/c++/15.1.1/bits/stl_map.h \
+  /usr/include/c++/15.1.1/bits/stl_multimap.h \
   /usr/include/c++/15.1.1/bits/stl_pair.h \
   /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
   /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
+  /usr/include/c++/15.1.1/bits/stl_tree.h \
   /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
   /usr/include/c++/15.1.1/bits/stl_vector.h \
   /usr/include/c++/15.1.1/bits/streambuf.tcc \
@@ -3049,16 +3060,20 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/ext/string_conversions.h \
   /usr/include/c++/15.1.1/ext/type_traits.h \
   /usr/include/c++/15.1.1/format \
+  /usr/include/c++/15.1.1/fstream \
   /usr/include/c++/15.1.1/functional \
   /usr/include/c++/15.1.1/initializer_list \
   /usr/include/c++/15.1.1/ios \
   /usr/include/c++/15.1.1/iosfwd \
+  /usr/include/c++/15.1.1/istream \
   /usr/include/c++/15.1.1/limits \
   /usr/include/c++/15.1.1/locale \
+  /usr/include/c++/15.1.1/map \
   /usr/include/c++/15.1.1/memory \
   /usr/include/c++/15.1.1/new \
   /usr/include/c++/15.1.1/numbers \
   /usr/include/c++/15.1.1/optional \
+  /usr/include/c++/15.1.1/ostream \
   /usr/include/c++/15.1.1/pstl/execution_defs.h \
   /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
   /usr/include/c++/15.1.1/pstl/glue_memory_defs.h \
@@ -3075,8 +3090,10 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/unordered_map \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
+  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
+  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++locale.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/ctype_base.h \
@@ -3131,10 +3148,16 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
 CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /home/alaam/stuf/elric/include/engine/point.hpp \
   /home/alaam/stuf/elric/include/engine/raw_text.hpp \
+  /home/alaam/stuf/elric/include/engine/sdl_wrapper.hpp \
   /home/alaam/stuf/elric/include/engine/texture.hpp \
   /home/alaam/stuf/elric/src/gate.hpp \
+  /home/alaam/stuf/elric/src/gate_packager.hpp \
+  /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
+  /home/alaam/stuf/elric/src/keymap.hpp \
   /home/alaam/stuf/elric/src/saver.hpp \
+  /home/alaam/stuf/elric/src/selection_box.hpp \
+  /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
   /usr/include/SDL3/SDL_assert.h \
   /usr/include/SDL3/SDL_asyncio.h \
@@ -3194,6 +3217,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/SDL3/SDL_tray.h \
   /usr/include/SDL3/SDL_version.h \
   /usr/include/SDL3/SDL_video.h \
+  /usr/include/SDL3_image/SDL_image.h \
   /usr/include/SDL3_ttf/SDL_ttf.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -3317,6 +3341,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/cxxabi_forced.h \
   /usr/include/c++/15.1.1/bits/cxxabi_init_exception.h \
   /usr/include/c++/15.1.1/bits/enable_special_members.h \
+  /usr/include/c++/15.1.1/bits/erase_if.h \
   /usr/include/c++/15.1.1/bits/exception.h \
   /usr/include/c++/15.1.1/bits/exception_defines.h \
   /usr/include/c++/15.1.1/bits/exception_ptr.h \
@@ -3325,6 +3350,8 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/functexcept.h \
   /usr/include/c++/15.1.1/bits/functional_hash.h \
   /usr/include/c++/15.1.1/bits/hash_bytes.h \
+  /usr/include/c++/15.1.1/bits/hashtable.h \
+  /usr/include/c++/15.1.1/bits/hashtable_policy.h \
   /usr/include/c++/15.1.1/bits/invoke.h \
   /usr/include/c++/15.1.1/bits/ios_base.h \
   /usr/include/c++/15.1.1/bits/istream.tcc \
@@ -3340,10 +3367,13 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/max_size_type.h \
   /usr/include/c++/15.1.1/bits/memory_resource.h \
   /usr/include/c++/15.1.1/bits/memoryfwd.h \
+  /usr/include/c++/15.1.1/bits/mofunc_impl.h \
   /usr/include/c++/15.1.1/bits/monostate.h \
   /usr/include/c++/15.1.1/bits/move.h \
+  /usr/include/c++/15.1.1/bits/move_only_function.h \
   /usr/include/c++/15.1.1/bits/nested_exception.h \
   /usr/include/c++/15.1.1/bits/new_allocator.h \
+  /usr/include/c++/15.1.1/bits/node_handle.h \
   /usr/include/c++/15.1.1/bits/ostream.h \
   /usr/include/c++/15.1.1/bits/ostream.tcc \
   /usr/include/c++/15.1.1/bits/ostream_insert.h \
@@ -3364,6 +3394,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/shared_ptr_base.h \
   /usr/include/c++/15.1.1/bits/specfun.h \
   /usr/include/c++/15.1.1/bits/std_abs.h \
+  /usr/include/c++/15.1.1/bits/std_function.h \
   /usr/include/c++/15.1.1/bits/std_mutex.h \
   /usr/include/c++/15.1.1/bits/stl_algo.h \
   /usr/include/c++/15.1.1/bits/stl_algobase.h \
@@ -3374,9 +3405,12 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/stl_iterator.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_types.h \
+  /usr/include/c++/15.1.1/bits/stl_map.h \
+  /usr/include/c++/15.1.1/bits/stl_multimap.h \
   /usr/include/c++/15.1.1/bits/stl_pair.h \
   /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
   /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
+  /usr/include/c++/15.1.1/bits/stl_tree.h \
   /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
   /usr/include/c++/15.1.1/bits/stl_vector.h \
   /usr/include/c++/15.1.1/bits/streambuf.tcc \
@@ -3387,6 +3421,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/unicode.h \
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
+  /usr/include/c++/15.1.1/bits/unordered_map.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -3420,6 +3455,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/ext/type_traits.h \
   /usr/include/c++/15.1.1/format \
   /usr/include/c++/15.1.1/fstream \
+  /usr/include/c++/15.1.1/functional \
   /usr/include/c++/15.1.1/initializer_list \
   /usr/include/c++/15.1.1/ios \
   /usr/include/c++/15.1.1/iosfwd \
@@ -3427,6 +3463,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/istream \
   /usr/include/c++/15.1.1/limits \
   /usr/include/c++/15.1.1/locale \
+  /usr/include/c++/15.1.1/map \
   /usr/include/c++/15.1.1/memory \
   /usr/include/c++/15.1.1/new \
   /usr/include/c++/15.1.1/numbers \
@@ -3456,6 +3493,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/tuple \
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
+  /usr/include/c++/15.1.1/unordered_map \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
@@ -3755,9 +3793,12 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o: /home/alaam/stuf/elric/src/selecti
   /usr/include/c++/15.1.1/bits/stl_iterator.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_types.h \
+  /usr/include/c++/15.1.1/bits/stl_map.h \
+  /usr/include/c++/15.1.1/bits/stl_multimap.h \
   /usr/include/c++/15.1.1/bits/stl_pair.h \
   /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
   /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
+  /usr/include/c++/15.1.1/bits/stl_tree.h \
   /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
   /usr/include/c++/15.1.1/bits/stl_vector.h \
   /usr/include/c++/15.1.1/bits/streambuf.tcc \
@@ -3798,6 +3839,7 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o: /home/alaam/stuf/elric/src/selecti
   /usr/include/c++/15.1.1/initializer_list \
   /usr/include/c++/15.1.1/ios \
   /usr/include/c++/15.1.1/iosfwd \
+  /usr/include/c++/15.1.1/map \
   /usr/include/c++/15.1.1/memory \
   /usr/include/c++/15.1.1/new \
   /usr/include/c++/15.1.1/numbers \
@@ -4108,9 +4150,12 @@ CMakeFiles/elric.dir/src/sim_context.cpp.o: /home/alaam/stuf/elric/src/sim_conte
   /usr/include/c++/15.1.1/bits/stl_iterator.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15.1.1/bits/stl_iterator_base_types.h \
+  /usr/include/c++/15.1.1/bits/stl_map.h \
+  /usr/include/c++/15.1.1/bits/stl_multimap.h \
   /usr/include/c++/15.1.1/bits/stl_pair.h \
   /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
   /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
+  /usr/include/c++/15.1.1/bits/stl_tree.h \
   /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
   /usr/include/c++/15.1.1/bits/stl_vector.h \
   /usr/include/c++/15.1.1/bits/streambuf.tcc \
@@ -4151,6 +4196,7 @@ CMakeFiles/elric.dir/src/sim_context.cpp.o: /home/alaam/stuf/elric/src/sim_conte
   /usr/include/c++/15.1.1/initializer_list \
   /usr/include/c++/15.1.1/ios \
   /usr/include/c++/15.1.1/iosfwd \
+  /usr/include/c++/15.1.1/map \
   /usr/include/c++/15.1.1/memory \
   /usr/include/c++/15.1.1/new \
   /usr/include/c++/15.1.1/numbers \
@@ -4461,6 +4507,8 @@ CMakeFiles/elric.dir/include/engine/animation.cpp.o:
 
 /usr/include/sys/types.h:
 
+/usr/include/c++/15.1.1/map:
+
 /usr/include/sys/single_threaded.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a:
@@ -4633,11 +4681,15 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o:
 
 /usr/include/bits/posix_opt.h:
 
+/usr/include/c++/15.1.1/bits/stl_map.h:
+
 /usr/include/SDL3_ttf/SDL_ttf.h:
 
 /usr/include/SDL3/SDL_close_code.h:
 
 /usr/include/c++/15.1.1/bits/localefwd.h:
+
+/usr/include/c++/15.1.1/bits/stl_tree.h:
 
 /usr/include/c++/15.1.1/bits/ranges_algobase.h:
 
@@ -4670,6 +4722,8 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o:
 /usr/include/assert.h:
 
 /home/alaam/stuf/elric/include/engine/loader/ase/aseprite.hpp:
+
+/usr/include/c++/15.1.1/bits/stl_multimap.h:
 
 /usr/include/c++/15.1.1/debug/assertions.h:
 

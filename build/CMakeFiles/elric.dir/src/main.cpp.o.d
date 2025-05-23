@@ -233,16 +233,19 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
  /home/alaam/stuf/elric/src/globals.hpp \
  /home/alaam/stuf/elric/src/keymap.hpp \
  /home/alaam/stuf/elric/src/selection_box.hpp \
- /home/alaam/stuf/elric/src/sim_context.hpp \
+ /home/alaam/stuf/elric/src/sim_context.hpp /usr/include/c++/15.1.1/map \
+ /usr/include/c++/15.1.1/bits/stl_tree.h \
+ /usr/include/c++/15.1.1/bits/node_handle.h \
+ /usr/include/c++/15.1.1/bits/stl_map.h \
+ /usr/include/c++/15.1.1/bits/stl_multimap.h \
+ /usr/include/c++/15.1.1/bits/erase_if.h \
+ /usr/include/c++/15.1.1/functional \
+ /usr/include/c++/15.1.1/bits/std_function.h \
  /usr/include/c++/15.1.1/unordered_map \
  /usr/include/c++/15.1.1/bits/unordered_map.h \
  /usr/include/c++/15.1.1/bits/hashtable.h \
  /usr/include/c++/15.1.1/bits/hashtable_policy.h \
  /usr/include/c++/15.1.1/bits/enable_special_members.h \
- /usr/include/c++/15.1.1/bits/node_handle.h \
- /usr/include/c++/15.1.1/bits/erase_if.h \
- /usr/include/c++/15.1.1/functional \
- /usr/include/c++/15.1.1/bits/std_function.h \
  /usr/include/c++/15.1.1/array \
  /usr/include/c++/15.1.1/bits/move_only_function.h \
  /usr/include/c++/15.1.1/bits/mofunc_impl.h \
@@ -266,4 +269,11 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
  /usr/include/c++/15.1.1/bits/locale_conv.h /usr/include/c++/15.1.1/span \
  /usr/include/c++/15.1.1/bits/monostate.h \
  /usr/include/c++/15.1.1/bits/unicode.h \
- /usr/include/c++/15.1.1/bits/unicode-data.h
+ /usr/include/c++/15.1.1/bits/unicode-data.h \
+ /home/alaam/stuf/elric/src/saver.hpp /usr/include/c++/15.1.1/fstream \
+ /usr/include/c++/15.1.1/istream /usr/include/c++/15.1.1/ostream \
+ /usr/include/c++/15.1.1/bits/ostream.tcc \
+ /usr/include/c++/15.1.1/bits/istream.tcc \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/15.1.1/bits/fstream.tcc

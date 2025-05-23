@@ -4,11 +4,17 @@
 #include <algorithm>
 
 SimContext::SimContext() {
-	m_gateMap = {
-		{"I", InputGate::make({})},
-		{"O", OutputGate::make({})},
-		{"and", AndGate::make({})},
-	    {"not", NotGate::make({})},
+	m_nameToIndex = {
+		{"I", 0},
+		{"O", 1},
+		{"and", 2},
+	    {"not", 3},
+	};
+	m_gateTypes = {
+		InputGate::make({}),
+		OutputGate::make({}),
+		AndGate::make({}),
+		NotGate::make({}),
 	};
 }
 
@@ -119,11 +125,11 @@ void SimContext::scroll(float dy) {
 }
 
 std::shared_ptr<Gate> SimContext::makeGate(std::string name, SDL_FPoint p) {
-	if (!m_gateMap.contains(name)) {
+	if (!m_nameToIndex.contains(name)) {
 		return nullptr;
 	}
 
-	auto gate = m_gateMap[name]->copy();
+	auto gate = gateByName(name)->copy();
 	gate->resetConnections();
 	gate->pos(p.x, p.y);
 	m_activeGates.push_back(gate);
@@ -131,13 +137,14 @@ std::shared_ptr<Gate> SimContext::makeGate(std::string name, SDL_FPoint p) {
 }
 
 void SimContext::addNewGate(std::shared_ptr<Gate> g) {
-	if (m_gateMap.contains(g->name())) {
+	if (m_nameToIndex.contains(g->name())) {
 		return;
 	}
 
 	g = g->copy();
 	g->resetConnections();
-	m_gateMap[g->name()] = g->copy();
+	m_nameToIndex[g->name()] = m_gateTypes.size();
+	m_gateTypes.push_back(g);
 }
 
 int SimContext::rawActiveGateCount() const {
@@ -150,4 +157,13 @@ int SimContext::rawActiveGateCount() const {
 		}
 	}
 	return gateCount;
+}
+
+int SimContext::getGateIndex(std::shared_ptr<Gate> g) {
+	for (int i = 0; i < m_activeGates.size(); i++) {
+		if (g == m_activeGates[i]) {
+			return i;
+		}
+	}
+	return -1;
 }

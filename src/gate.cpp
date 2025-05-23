@@ -153,6 +153,26 @@ std::weak_ptr<Gate::OutputNode> Gate::outputNodeOnPos(SDL_FPoint p) {
     return std::weak_ptr<OutputNode>();
 }
 
+int Gate::getInputNodeIndex(std::weak_ptr<InputNode> n) {
+	auto node = n.lock();
+	for (int i = 0; i < m_inputNodes.size(); i++) {
+		if (m_inputNodes[i] == node) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int Gate::getOutputNodeIndex(std::weak_ptr<OutputNode> n) {
+	auto node = n.lock();
+	for (int i = 0; i < m_outputNodes.size(); i++) {
+		if (m_outputNodes[i] == node) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 void Gate::render() {
     if (m_spriteDirty) {
         createSprite();
@@ -225,9 +245,9 @@ void AndGate::electrify() { m_outputNodes[0]->state = m_inputNodes[0]->state() &
 void NotGate::electrify() { m_outputNodes[0]->state = !m_inputNodes[0]->state(); }
 
 CustomGate::CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color) {
-	float time = SDL_GetTicks();
+    float time = SDL_GetTicks();
     create(gates);
-	SDL_Log("time to make custom gate: %f", (SDL_GetTicks() - time));
+    SDL_Log("time to make custom gate: %f", (SDL_GetTicks() - time));
 
     m_pos.x = pos.x;
     m_pos.y = pos.y;
@@ -253,7 +273,7 @@ CustomGate::CustomGate(const CustomGate &other) : Gate(other) {
     m_outputNodes = other.m_outputNodes;
     m_spriteDirty = true;
 
-    //resetConnections();
+    // resetConnections();
 
     m_inputNodes = other.m_inputNodes;
     m_outputNodes = other.m_outputNodes;
@@ -317,37 +337,36 @@ void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
     }
     float avX = totalX / gates.size();
     float avY = totalY / gates.size();
+
+	std::sort(m_inputs.begin(), m_inputs.end(), [](std::shared_ptr<InputGate> a, std::shared_ptr<InputGate> b){ return a->realpos().y < b->realpos().y; });
+	std::sort(m_outputs.begin(), m_outputs.end(), [](std::shared_ptr<OutputGate> a, std::shared_ptr<OutputGate> b){ return a->realpos().y < b->realpos().y; });
+
     for (auto g : allGates) {
-		for (int i = 0; i < g->maxOutput(); i++) {
-			auto outNode = g->getOutputNode(i).lock();
-			if (!outNode) {
-				continue;
-			}
-			outNode->owner = g;
+        for (int i = 0; i < g->maxOutput(); i++) {
+            auto outNode = g->getOutputNode(i).lock();
+            if (!outNode) {
+                continue;
+            }
+            outNode->owner = g;
             for (int j = 0; j < gates.size(); j++) {
-				if (outNode->toGate.lock() == gates[j].lock()) {
-					outNode->toGate = allGates[j];
-				}
-			}
-		}
-
-		for (int i = 0; i < g->maxInput(); i++) {
-			auto inNode = g->getInputNode(i).lock();
-			inNode->owner = g;
+                if (outNode->toGate.lock() == gates[j].lock()) {
+                    outNode->toGate = allGates[j];
+                }
+            }
+        }
+        for (int i = 0; i < g->maxInput(); i++) {
+            auto inNode = g->getInputNode(i).lock();
+            inNode->owner = g;
             for (int j = 0; j < gates.size(); j++) {
-				if (!inNode->connected.expired() && inNode->connected.lock()->owner.lock() == gates[j].lock()) {
-					for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
-						if (inNode->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
-							inNode->connected = allGates[j]->getOutputNode(k);
-						}
-					}
-				}
-			}
-		}
-
-
+                if (!inNode->connected.expired() && inNode->connected.lock()->owner.lock() == gates[j].lock()) {
+                    for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
+                        if (inNode->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
+                            inNode->connected = allGates[j]->getOutputNode(k);
+                        }
+                    }
+                }
+            }
+        }
         g->pos(g->realpos().x - avX / 2.f + 1920.f / 2.f, g->realpos().y - avY / 2.f + 1080.f / 2.f);
     }
 }
-
-int CustomGate::rawGateCount() { return m_gates.size(); }

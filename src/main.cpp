@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <bitset>
 #include <format>
-// #include "saver.hpp" HOLD
+ #include "saver.hpp"
 
 SDL sdl;
 TTF_Font *g_font;
@@ -27,7 +27,8 @@ GatePackager g_gatePackager;
 GateAdder g_gateAdder;
 
 int main() {
-    // Saver s;
+	Saver saver;
+	saver.load();
 
     g_font = TTF_OpenFont("art/fonts/sourcecodevf/sourcecodevf.ttf", 24.);
 
@@ -170,6 +171,8 @@ int main() {
     }
 
 EXIT:
+	saver.save();
+
     TTF_CloseFont(g_font);
     return 0;
 }
