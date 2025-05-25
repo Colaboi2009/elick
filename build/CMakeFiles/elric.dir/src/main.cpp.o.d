@@ -233,47 +233,44 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
  /home/alaam/stuf/elric/src/globals.hpp \
  /home/alaam/stuf/elric/src/keymap.hpp \
  /home/alaam/stuf/elric/src/selection_box.hpp \
- /home/alaam/stuf/elric/src/sim_context.hpp /usr/include/c++/15.1.1/map \
- /usr/include/c++/15.1.1/bits/stl_tree.h \
- /usr/include/c++/15.1.1/bits/node_handle.h \
- /usr/include/c++/15.1.1/bits/stl_map.h \
- /usr/include/c++/15.1.1/bits/stl_multimap.h \
- /usr/include/c++/15.1.1/bits/erase_if.h \
- /usr/include/c++/15.1.1/functional \
- /usr/include/c++/15.1.1/bits/std_function.h \
+ /home/alaam/stuf/elric/src/sim_context.hpp \
  /usr/include/c++/15.1.1/unordered_map \
  /usr/include/c++/15.1.1/bits/unordered_map.h \
  /usr/include/c++/15.1.1/bits/hashtable.h \
  /usr/include/c++/15.1.1/bits/hashtable_policy.h \
  /usr/include/c++/15.1.1/bits/enable_special_members.h \
+ /usr/include/c++/15.1.1/bits/node_handle.h \
+ /usr/include/c++/15.1.1/bits/erase_if.h \
+ /usr/include/c++/15.1.1/functional \
+ /usr/include/c++/15.1.1/bits/std_function.h \
  /usr/include/c++/15.1.1/array \
  /usr/include/c++/15.1.1/bits/move_only_function.h \
  /usr/include/c++/15.1.1/bits/mofunc_impl.h \
- /usr/include/c++/15.1.1/algorithm \
- /usr/include/c++/15.1.1/bits/stl_algo.h \
- /usr/include/c++/15.1.1/bits/algorithmfwd.h \
- /usr/include/c++/15.1.1/bits/stl_heap.h \
- /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
- /usr/include/c++/15.1.1/bits/ranges_algo.h \
- /usr/include/c++/15.1.1/optional \
- /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15.1.1/bitset /usr/include/c++/15.1.1/format \
- /usr/include/c++/15.1.1/charconv /usr/include/c++/15.1.1/limits \
- /usr/include/c++/15.1.1/locale \
+ /home/alaam/stuf/elric/src/saver.hpp /usr/include/c++/15.1.1/fstream \
+ /usr/include/c++/15.1.1/istream /usr/include/c++/15.1.1/ostream \
+ /usr/include/c++/15.1.1/format /usr/include/c++/15.1.1/charconv \
+ /usr/include/c++/15.1.1/limits /usr/include/c++/15.1.1/locale \
  /usr/include/c++/15.1.1/bits/locale_facets_nonio.h \
  /usr/include/c++/15.1.1/ctime \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/time_members.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/messages_members.h \
  /usr/include/libintl.h /usr/include/c++/15.1.1/bits/codecvt.h \
  /usr/include/c++/15.1.1/bits/locale_facets_nonio.tcc \
- /usr/include/c++/15.1.1/bits/locale_conv.h /usr/include/c++/15.1.1/span \
+ /usr/include/c++/15.1.1/bits/locale_conv.h \
+ /usr/include/c++/15.1.1/optional /usr/include/c++/15.1.1/span \
  /usr/include/c++/15.1.1/bits/monostate.h \
  /usr/include/c++/15.1.1/bits/unicode.h \
+ /usr/include/c++/15.1.1/bits/stl_algo.h \
+ /usr/include/c++/15.1.1/bits/algorithmfwd.h \
+ /usr/include/c++/15.1.1/bits/stl_heap.h \
+ /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
  /usr/include/c++/15.1.1/bits/unicode-data.h \
- /home/alaam/stuf/elric/src/saver.hpp /usr/include/c++/15.1.1/fstream \
- /usr/include/c++/15.1.1/istream /usr/include/c++/15.1.1/ostream \
  /usr/include/c++/15.1.1/bits/ostream.tcc \
  /usr/include/c++/15.1.1/bits/istream.tcc \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/15.1.1/bits/fstream.tcc
+ /usr/include/c++/15.1.1/bits/fstream.tcc \
+ /usr/include/c++/15.1.1/algorithm \
+ /usr/include/c++/15.1.1/bits/ranges_algo.h \
+ /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/15.1.1/bitset

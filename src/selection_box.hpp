@@ -31,7 +31,6 @@ class SelectionBox {
     void begin();
     void end();
 
-    void deleteSelection();
     void copySelection();
     void pasteSelected();
 	// deprecated for now
@@ -60,6 +59,7 @@ class SelectionBox {
 
 	void cancel();
     void moveSelection(float dx, float dy);
+    void deleteSelection();
 
 	void updateHomeOffset(float dx, float dy);
 };

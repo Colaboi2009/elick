@@ -27,10 +27,12 @@ std::vector<bool> Saver::rbools() {
         bytes[i] = rbyte();
     }
     std::vector<bool> bools(count);
-    for (int i = 0, j = 0; i < count; i++) {
-        j = i % 8 == 0 ? j++ : j;
-        bools[i] = (bytes[j] >> (i % 8)) & 1;
-    }
+	for (int i = 0; i < bytes.size(); i++) {
+		int bitCount = (bools.size() - i * 8 > 8) ? 8 : bools.size() - i * 8;
+		for (int j = 0; j < bitCount; j++) {
+			bools[i * 8 + j] = (bytes[i] >> j) & 1;
+		}
+	}
     return bools;
 }
 
@@ -67,13 +69,10 @@ Saver::GateData Saver::rgate() {
 		node.c = rcolor();
         node.name = rstring();
     }
-    //std::vector<bool> states = rbools();
-	//assert(states.size() == gate.outputNodes.size());
-
-	bool state = rbyte();
+    std::vector<bool> states = rbools();
+	assert(states.size() == gate.outputNodes.size() && "state count must be equal to output node count!");
 	for (int i = 0; i < gate.outputNodes.size(); i++) {
-		//gate.outputNodes[i].state = states[i];
-		gate.outputNodes[i].state = state;
+		gate.outputNodes[i].state = states[i];
 	}
 
 	gate.inputNodes.resize(rint());
@@ -99,49 +98,74 @@ Saver::GateData Saver::rgate() {
 	return gate;
 }
 
+std::vector<std::shared_ptr<Gate>> Saver::processGates(std::vector<GateData> data) {
+	std::vector<std::shared_ptr<Gate>> pgates(data.size());;
+	for (int i = 0; i < data.size(); i++) {
+		switch (data[i].type) {
+			case 0: pgates[i] = AndGate::make(data[i].pos); break;
+			case 1: pgates[i] = NotGate::make(data[i].pos); break;
+			case 2: pgates[i] = InputGate::make(data[i].pos); break;
+			case 3: pgates[i] = OutputGate::make(data[i].pos); break;
+			case 4: {
+				auto context = processGates(data[i].customGateData);
+				std::vector<std::weak_ptr<Gate>> contextWeak(context.size());
+				for (int j = 0; j < context.size(); j++) {
+					contextWeak[j] = context[j];
+				}
+				pgates[i] = CustomGate::make(contextWeak, data[i].pos, data[i].name, data[i].color);
+				g_context.addNewGate(pgates[i]); // auto checks whether or not the gate already exists
+			} break;
+		}
+	}
+
+	// node population; harmless if nodes aren't connected
+	for (int i = 0; i < data.size(); i++) {
+		for (int j = 0; j < data[i].outputNodes.size(); j++) {
+			const auto &outNode = pgates[i]->getOutputNode(j).lock();
+			const auto &outData = data[i].outputNodes[j];
+			outNode->p = outData.p;
+			if (outData.connectedGateActiveArrayIndex != -1) {
+				outNode->toGate = pgates[outData.connectedGateActiveArrayIndex];
+			}
+			outNode->c = outData.c;
+			outNode->name = outData.name;
+			outNode->state = outData.state;
+		}
+		for (int j = 0; j < data[i].inputNodes.size(); j++) {
+			const auto &inNode = pgates[i]->getInputNode(j).lock();
+			const auto &inData = data[i].inputNodes[j];
+			inNode->p = inData.p;
+			if (inData.connectedGateActiveArrayIndex != -1) {
+				inNode->connected = pgates[inData.connectedGateActiveArrayIndex]->getOutputNode(inData.connectedNodeIndex);
+				inNode->lineNodes = inData.nodeLines;
+			}
+			inNode->c = inData.c;
+			inNode->name = inData.name;
+		}
+	}
+
+	return pgates;
+}
+
 void Saver::load() {
     SDL_Log("Saver::load");
     m_if.open("data.piss");
+	if (m_if.fail()) {
+		return;
+	}
+
+	std::vector<GateData> gateTypeData(rint());
+	for (int i = 0; i < gateTypeData.size(); i++) {
+		gateTypeData[i] = rgate();
+	}
+	processGates(gateTypeData);
 
 	std::vector<GateData> gateData(rint());
 	for (int i = 0; i < gateData.size(); i++) {
 		gateData[i] = rgate();
 	}
-	for (auto g : gateData) {
-		SDL_Log("------------------GATE------------------");
-		SDL_Log("type %i, pos %f %f, color %i %i %i %i, name %s, typeIndex %i", g.type, g.pos.x, g.pos.y, g.color.r, g.color.g, g.color.b, g.color.a, g.name.c_str(), g.typeArrayIndex);
-		SDL_Log("outputNodes %zu", g.outputNodes.size());
-		for (auto &node : g.outputNodes) {
-			SDL_Log("pos %f %f, index %i, color %i %i %i %i, name %s, state %b", node.p.x, node.p.y, node.connectedGateActiveArrayIndex, node.c.r, node.c.g, node.c.b, node.c.a, node.name.c_str(), node.state);
-		}
-		SDL_Log("inputNodes %zu", g.inputNodes.size());
-		for (auto &node : g.inputNodes) {
-			SDL_Log("pos %f %f, gate index %i, node index %i, node line size %zu, color %i %i %i %i, name %s", node.p.x, node.p.y, node.connectedGateActiveArrayIndex, node.connectedNodeIndex, node.nodeLines.size(), node.c.r, node.c.g, node.c.b, node.c.a, node.name.c_str());
-			std::string points = "";
-			for (auto &p : node.nodeLines) {
-				points += std::format("{}:{}, ", p.x, p.y);
-			}
-			SDL_Log("%s", points.c_str());
-		}
-		for (auto g : g.customGateData) {
-			SDL_Log("-----GATE IN CUSTOM-----");
-			SDL_Log("type %i, pos %f %f, color %i %i %i %i, name %s, typeIndex %i", g.type, g.pos.x, g.pos.y, g.color.r, g.color.g, g.color.b, g.color.a, g.name.c_str(), g.typeArrayIndex);
-			SDL_Log("outputNodes %zu", g.outputNodes.size());
-			for (auto &node : g.outputNodes) {
-				SDL_Log("pos %f %f, index %i, color %i %i %i %i, name %s, state %b", node.p.x, node.p.y, node.connectedGateActiveArrayIndex, node.c.r, node.c.g, node.c.b, node.c.a, node.name.c_str(), node.state);
-			}
-			SDL_Log("inputNodes %zu", g.inputNodes.size());
-			for (auto &node : g.inputNodes) {
-				SDL_Log("pos %f %f, gate index %i, node index %i, node line size %zu, color %i %i %i %i, name %s", node.p.x, node.p.y, node.connectedGateActiveArrayIndex, node.connectedNodeIndex, node.nodeLines.size(), node.c.r, node.c.g, node.c.b, node.c.a, node.name.c_str());
-				std::string points = "";
-				for (auto &p : node.nodeLines) {
-					points += std::format("{}:{}, ", p.x, p.y);
-				}
-				SDL_Log("%s", points.c_str());
-			}
-
-		}
-	}
+	auto context = processGates(gateData);
+	g_context.loadContext(context);
 
     m_if.close();
     SDL_Log("~Saver::load");
@@ -153,22 +177,15 @@ void Saver::wbyte(byte b) { m_of.write((char *)&b, 1); }
 
 void Saver::wbools(std::vector<bool> bools) {
     wbyte((byte)bools.size());
-    for (int i = 0; bools.size() - i >= 8; i += 8) {
-        if (bools.size() - i < 8) {
-            int required = 8 - bools.size();
-            for (int i = 0; i < required; i++) {
-                bools.push_back(0);
-            }
-        }
-        char c{};
-        for (int i = 0; i < bools.size(); i++) {
-            c |= bools[i] << i;
-        }
-        wbyte(c);
-    }
-}
-void Saver::wbool(bool b) {
-	wbyte(b);
+	int byteCount = std::ceil((float)bools.size() / 8);
+	for (int i = 0; i < byteCount; i++) {
+		byte c = 0;
+		int bitCount = (bools.size() - i * 8 > 8) ? 8 : bools.size() - i * 8;
+		for (int j = 0; j < bitCount; j++) {
+			c |= bools[i * 8 + j] << j;
+		}
+		wbyte(c);
+	}
 }
 
 void Saver::wshort(short s) {
@@ -241,7 +258,7 @@ void Saver::wgate(std::shared_ptr<Gate> g, const std::vector<std::shared_ptr<Gat
         wcolor(outNode->c);
         wstring(outNode->name);
     }
-    wbool(g->states()[0]);
+    wbools(g->states());
 
     wint(g->maxInput());
     for (int i = 0; i < g->maxInput(); i++) {
@@ -286,6 +303,11 @@ void Saver::wgate(std::shared_ptr<Gate> g, const std::vector<std::shared_ptr<Gat
 void Saver::save() {
     SDL_Log("Saver::save");
     m_of.open("data.piss");
+
+	wint(g_context.gateTypeCount());
+	for (int i = 0; i < g_context.gateTypeCount(); i++) {
+		wgate(g_context.getGateType(i), {});
+	}
 
 	wint(g_context.activeGateCount());
 	for (int i = 0; i < g_context.activeGateCount(); i++) {

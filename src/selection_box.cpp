@@ -279,19 +279,14 @@ void SelectionBox::addToSelection(std::vector<std::weak_ptr<Gate>> gates) {
 }
 
 void SelectionBox::packageSelection() {
-    // g_uiActive = true;
-    std::string name = "CUSTOM" + std::to_string(g_context.gateTypeCount());
-    SDL_Color color = {255, 255, 255, 255};
-    std::shared_ptr<CustomGate> custom = CustomGate::make(m_selection, g_mousePos, name, color);
-    deleteSelection();
-    g_context.addNewGate(custom);
-    g_context.makeGate(custom->name(), g_mousePos);
+	g_gatePackager.begin(m_selection);
 }
 
 void SelectionBox::duplicateSelection() {
     auto orig = m_selection[0].lock();
     auto copy = g_context.makeGate(m_selection[0].lock()->name(), rectToPoint(orig->realpos()));
-    SDL_FPoint p = rectToPoint(copy->renderpos());
+	copy->name();
+    SDL_FPoint p = rectToPoint(copy->realpos());
     while (!g_context.getGateAt(p).expired()) {
         p.y += orig->realpos().h;
     }
@@ -306,7 +301,7 @@ void SelectionBox::editGate() {
 
     std::shared_ptr<CustomGate> gate = std::dynamic_pointer_cast<CustomGate>(m_selection[0].lock());
     if (gate) {
-        g_context.startContext(gate->context());
+        g_context.startContext(gate->context(), gate->name());
     }
 }
 

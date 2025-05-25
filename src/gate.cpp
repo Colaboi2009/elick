@@ -73,10 +73,31 @@ Gate::Gate(const Gate &other) {
 
     m_maxInput = other.m_maxInput;
     m_maxOutput = other.m_maxOutput;
-    m_inputNodes = other.m_inputNodes;
-    m_outputNodes = other.m_outputNodes;
 
-    m_spriteDirty = true;
+	createSprite();
+}
+
+std::shared_ptr<Gate> Gate::initCopy(const Gate &other) {
+	resetConnections();
+	for (int i = 0; i < m_maxInput; i++) {
+		auto in = m_inputNodes[i];
+		auto inOther = other.m_inputNodes[i];
+
+		in->c = inOther->c;
+		in->connected = inOther->connected;
+		in->lineNodes = inOther->lineNodes;
+		in->name = inOther->name;
+	}
+	for (int i = 0; i < m_maxOutput; i++) {
+		auto out = m_outputNodes[i];
+		auto outOther = other.m_outputNodes[i];
+
+		out->c = outOther->c;
+		out->name = outOther->name;
+		out->toGate = outOther->toGate;
+	}
+
+	return shared_from_this();
 }
 
 Gate::~Gate() {}
@@ -270,13 +291,27 @@ CustomGate::CustomGate(const CustomGate &other) : Gate(other) {
     m_name = other.m_name;
     m_maxInput = other.m_maxInput;
     m_maxOutput = other.m_maxOutput;
-    m_outputNodes = other.m_outputNodes;
-    m_spriteDirty = true;
 
-    // resetConnections();
+	createSprite();
+}
 
-    m_inputNodes = other.m_inputNodes;
-    m_outputNodes = other.m_outputNodes;
+void CustomGate::updateContext(std::vector<std::weak_ptr<Gate>> gates) {
+	int inputsBefore = m_inputs.size();
+	int outputsBefore = m_outputs.size();
+	SDL_Log("expecting something");
+	m_inputs.clear();
+	m_outputs.clear();
+	m_gates.clear();
+	create(gates);
+	m_maxInput = m_inputs.size();
+	m_maxOutput = m_outputs.size();
+	SDL_Log("i lied");
+
+	if (inputsBefore != m_maxInput || outputsBefore != m_maxOutput) {
+		resetConnections();
+		createSprite();
+	}
+	SDL_Log("i lied again");
 }
 
 void CustomGate::electrify() {

@@ -1,23 +1,26 @@
 #pragma once
 
 #include "gate.hpp"
-#include <map>
+#include <unordered_map>
 #include <functional>
 
 class SimContext {
 private:
-	std::map<std::string, int> m_nameToIndex;
+	std::unordered_map<std::string, int> m_nameToIndex;
 	std::vector<std::shared_ptr<Gate>> m_gateTypes;
 
 	std::vector<std::shared_ptr<Gate>> m_gConGates;
 	SDL_FPoint m_gConOffset;
+
 	bool m_isInContext{false};
+	std::string m_contextName;
 
 	float m_scrollPos = 10.f;
 	float m_scale = 1.f;
 
 	SDL_FPoint m_activeOffset;
 	std::vector<std::shared_ptr<Gate>> m_activeGates;
+
 
 	std::shared_ptr<Gate> gateByName(std::string n) { return m_gateTypes[m_nameToIndex[n]]; }
 
@@ -34,14 +37,19 @@ public:
 	// index of ACTIVE gates
 	int getGateIndex(std::shared_ptr<Gate>);
 
+	std::shared_ptr<Gate> getGateType(int index) const { return m_gateTypes[index]; }
+	bool gateTypeWithNameExists(std::string name) const { return m_nameToIndex.contains(name); }
+
 	const std::vector<std::shared_ptr<Gate>> activeGates() const { return m_activeGates; }
+
+	void loadContext(std::vector<std::shared_ptr<Gate>> p) { m_gConGates = m_activeGates = p; }
 
 	void render();
 	void renderGateNodeLines();
 
 	int electrify();
 
-	void startContext(std::vector<std::shared_ptr<Gate>>);
+	void startContext(std::vector<std::shared_ptr<Gate>>, std::string name);
 	void endContext();
 
 	void move(float dx, float dy);
@@ -59,4 +67,5 @@ public:
 
 	std::shared_ptr<Gate> makeGate(std::string name, SDL_FPoint);
 	void addNewGate(std::shared_ptr<Gate>);
+	void addNewGate(std::shared_ptr<Gate>, int index);
 };

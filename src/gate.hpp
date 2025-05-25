@@ -59,6 +59,7 @@ class Gate : public std::enable_shared_from_this<Gate> {
     void createSprite();
 
     std::shared_ptr<Gate> init();
+	std::shared_ptr<Gate> initCopy(const Gate &other);
 
   public:
     Gate() {}
@@ -69,7 +70,7 @@ class Gate : public std::enable_shared_from_this<Gate> {
         return std::make_shared<Gate>(pos, maxIn, maxOut, name, c)->init();
     }
 
-    virtual std::shared_ptr<Gate> copy() const { return std::make_shared<Gate>(*this); }
+    virtual std::shared_ptr<Gate> copy() const { return std::make_shared<Gate>(*this)->initCopy(*this); }
     virtual std::shared_ptr<Gate> shared() { return shared_from_this(); }
 
     std::string name() const { return m_name; }
@@ -125,7 +126,7 @@ class InputGate : public Gate {
         return std::dynamic_pointer_cast<InputGate>(std::make_shared<InputGate>(pos)->init());
     }
     InputGate(const InputGate &other) : Gate(other) {}
-    std::shared_ptr<Gate> copy() const override { return std::make_shared<InputGate>(*this); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<InputGate>(*this)->initCopy(*this); }
     std::shared_ptr<Gate> shared() override { return std::make_shared<InputGate>(*this); }
     void set(bool b) { m_outputNodes[0]->state = b; }
     void flip() { m_outputNodes[0]->state = !m_outputNodes[0]->state; }
@@ -140,31 +141,31 @@ class OutputGate : public Gate {
     }
     OutputGate(const OutputGate &other) : Gate(other) {}
 
-    std::shared_ptr<Gate> copy() const override { return std::make_shared<OutputGate>(*this); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<OutputGate>(*this)->initCopy(*this); }
     std::shared_ptr<Gate> shared() override { return std::make_shared<OutputGate>(*this); }
     void electrify() override;
 };
 
 class AndGate : public Gate {
   public:
-    AndGate(SDL_FPoint pos) : Gate(pos, 2, 1, "and", {180, 180, 255, 255}) {}
+    AndGate(SDL_FPoint pos) : Gate(pos, 2, 1, "AND", {180, 180, 255, 255}) {}
     static std::shared_ptr<AndGate> make(SDL_FPoint pos) {
         return std::dynamic_pointer_cast<AndGate>(std::make_shared<AndGate>(pos)->init());
     }
     AndGate(const AndGate &other) : Gate(other) {}
-    std::shared_ptr<Gate> copy() const override { return std::make_shared<AndGate>(*this); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<AndGate>(*this)->initCopy(*this); }
     std::shared_ptr<Gate> shared() override { return std::make_shared<AndGate>(*this); }
     void electrify() override;
 };
 
 class NotGate : public Gate {
   public:
-    NotGate(SDL_FPoint pos) : Gate(pos, 1, 1, "not", {255, 30, 30, 255}) {}
+    NotGate(SDL_FPoint pos) : Gate(pos, 1, 1, "NOT", {255, 30, 30, 255}) {}
     static std::shared_ptr<NotGate> make(SDL_FPoint pos) {
         return std::dynamic_pointer_cast<NotGate>(std::make_shared<NotGate>(pos)->init());
     }
     NotGate(const NotGate &other) : Gate(other) {}
-    std::shared_ptr<Gate> copy() const override { return std::make_shared<NotGate>(*this); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<NotGate>(*this)->initCopy(*this); }
     std::shared_ptr<Gate> shared() override { return std::make_shared<NotGate>(*this); }
     void electrify() override;
 };
@@ -183,8 +184,10 @@ class CustomGate : public Gate {
         return std::dynamic_pointer_cast<CustomGate>(std::make_shared<CustomGate>(gates, pos, name, color)->init());
     }
     CustomGate(const CustomGate &other);
-    std::shared_ptr<Gate> copy() const override { return std::make_shared<CustomGate>(*this); }
+    std::shared_ptr<Gate> copy() const override { return std::make_shared<CustomGate>(*this)->initCopy(*this); }
     std::shared_ptr<Gate> shared() override { return std::make_shared<CustomGate>(*this); }
+
+	void updateContext(std::vector<std::weak_ptr<Gate>> gates);
 
 	int rawGateCount() const { return m_gates.size(); }
 

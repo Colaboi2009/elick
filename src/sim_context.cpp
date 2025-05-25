@@ -7,8 +7,8 @@ SimContext::SimContext() {
 	m_nameToIndex = {
 		{"I", 0},
 		{"O", 1},
-		{"and", 2},
-	    {"not", 3},
+		{"AND", 2},
+	    {"NOT", 3},
 	};
 	m_gateTypes = {
 		InputGate::make({}),
@@ -55,13 +55,14 @@ int SimContext::electrify() {
 	return i;
 }
 
-void SimContext::startContext(std::vector<std::shared_ptr<Gate>> gates) {
+void SimContext::startContext(std::vector<std::shared_ptr<Gate>> gates, std::string name) {
 	m_gConGates = m_activeGates;
 	m_activeGates = gates;
 
 	m_gConOffset = m_activeOffset;
 	m_activeOffset = {0, 0};
 
+	m_contextName = name;
 	m_isInContext = true;
 }
 
@@ -72,6 +73,15 @@ void SimContext::endContext() {
 	m_isInContext = false;
 	m_activeGates = m_gConGates;
 	m_activeOffset = m_gConOffset;
+
+	auto &gate = m_gateTypes[m_nameToIndex[m_contextName]];
+	if (const auto &custom = std::dynamic_pointer_cast<CustomGate>(gate)) {
+		std::vector<std::weak_ptr<Gate>> contextWeak(m_activeGates.size());
+		for (int i = 0; i < contextWeak.size(); i++) {
+			contextWeak[i] = m_activeGates[i];
+		}
+		custom->updateContext(contextWeak);
+	}
 }
 
 void SimContext::move(float dx, float dy) {
@@ -130,7 +140,6 @@ std::shared_ptr<Gate> SimContext::makeGate(std::string name, SDL_FPoint p) {
 	}
 
 	auto gate = gateByName(name)->copy();
-	gate->resetConnections();
 	gate->pos(p.x, p.y);
 	m_activeGates.push_back(gate);
 	return gate;
@@ -145,6 +154,21 @@ void SimContext::addNewGate(std::shared_ptr<Gate> g) {
 	g->resetConnections();
 	m_nameToIndex[g->name()] = m_gateTypes.size();
 	m_gateTypes.push_back(g);
+}
+
+void SimContext::addNewGate(std::shared_ptr<Gate> g, int index) {
+	if (m_nameToIndex.contains(g->name())) {
+		return;
+	}
+
+	g = g->copy();
+	g->resetConnections();
+	m_nameToIndex[g->name()] = index;
+	if (index >= m_gateTypes.size()) {
+		// IM AWARE OF THE THOUSANDS OF REOLCATIONS BUT SUCK IT
+		m_gateTypes.resize(index);
+	}
+	m_gateTypes[index] = g;
 }
 
 int SimContext::rawActiveGateCount() const {
