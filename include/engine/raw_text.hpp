@@ -23,5 +23,5 @@ class RawText {
 
   public:
 	// returns the texture of the text
-    static Texture Render(std::string, SDL_FRect, bool alignLeft, SDL_Color, TTF_Font *, float scale = 1);
+    static Texture Render(std::string, SDL_FRect, bool alignLeft, SDL_Color, TTF_Font *, float scale = 1, bool render = true);
 };

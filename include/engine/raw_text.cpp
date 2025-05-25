@@ -28,13 +28,15 @@ void RawText::render(SDL_FRect r) {
 	m_texture.render(r, m_scale);
 }
 
-Texture RawText::Render(std::string str, SDL_FRect r, bool alignLeft, SDL_Color c, TTF_Font *font, float scale) {
+Texture RawText::Render(std::string str, SDL_FRect r, bool alignLeft, SDL_Color c, TTF_Font *font, float scale, bool render) {
 	if (str.size() < 1) {
 		return {};
 	}
 	RawText t{str, c, font};
 	t.alignLeft(alignLeft);
 	t.scale(scale);
-	t.render(r);
+	if (render) {
+		t.render(r);
+	}
 	return t.tex();
 }

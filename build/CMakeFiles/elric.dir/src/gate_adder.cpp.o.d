@@ -127,7 +127,13 @@ CMakeFiles/elric.dir/src/gate_adder.cpp.o: \
  /usr/include/c++/15.1.1/cstddef \
  /usr/include/c++/15.1.1/bits/uses_allocator.h \
  /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
- /usr/include/c++/15.1.1/tuple /home/alaam/stuf/elric/src/globals.hpp \
+ /usr/include/c++/15.1.1/tuple /usr/include/c++/15.1.1/vector \
+ /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
+ /usr/include/c++/15.1.1/bits/stl_vector.h \
+ /usr/include/c++/15.1.1/bits/stl_bvector.h \
+ /usr/include/c++/15.1.1/bits/vector.tcc \
+ /usr/include/c++/15.1.1/bits/formatfwd.h \
+ /home/alaam/stuf/elric/src/globals.hpp \
  /home/alaam/stuf/elric/include/engine/sdl_wrapper.hpp \
  /usr/include/SDL3/SDL.h /usr/include/SDL3/SDL_assert.h \
  /usr/include/SDL3/SDL_asyncio.h /usr/include/SDL3/SDL_bits.h \
@@ -144,12 +150,6 @@ CMakeFiles/elric.dir/src/gate_adder.cpp.o: \
  /usr/include/SDL3/SDL_time.h /usr/include/SDL3/SDL_timer.h \
  /usr/include/SDL3/SDL_tray.h /usr/include/SDL3/SDL_version.h \
  /usr/include/SDL3/SDL_oldnames.h /usr/include/SDL3_image/SDL_image.h \
- /usr/include/c++/15.1.1/vector \
- /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
- /usr/include/c++/15.1.1/bits/stl_vector.h \
- /usr/include/c++/15.1.1/bits/stl_bvector.h \
- /usr/include/c++/15.1.1/bits/vector.tcc \
- /usr/include/c++/15.1.1/bits/formatfwd.h \
  /home/alaam/stuf/elric/include/engine/point.hpp \
  /home/alaam/stuf/elric/include/engine/raw_text.hpp \
  /usr/include/SDL3_ttf/SDL_ttf.h \

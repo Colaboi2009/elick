@@ -2,11 +2,17 @@
 
 #include <SDL3/SDL_events.h>
 #include <string>
+#include <vector>
 
 class GateAdder {
 private:
 	std::string m_inputText = "";
 	bool m_active = false;
+
+	std::vector<std::string> m_possibleGates;
+	int m_selectedIndex;
+
+	void updatePossibleGateList();
 
 public:
 	GateAdder();
