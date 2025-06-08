@@ -73,6 +73,12 @@
 },
 {
   "directory": "/home/alaam/stuf/elric/build",
+  "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/keybind_parser.cpp.o -c /home/alaam/stuf/elric/src/keybind_parser.cpp",
+  "file": "/home/alaam/stuf/elric/src/keybind_parser.cpp",
+  "output": "CMakeFiles/elric.dir/src/keybind_parser.cpp.o"
+},
+{
+  "directory": "/home/alaam/stuf/elric/build",
   "command": "/usr/bin/c++  -I/home/alaam/stuf/elric/src -I/home/alaam/stuf/elric/include -g -std=c++23 -o CMakeFiles/elric.dir/src/main.cpp.o -c /home/alaam/stuf/elric/src/main.cpp",
   "file": "/home/alaam/stuf/elric/src/main.cpp",
   "output": "CMakeFiles/elric.dir/src/main.cpp.o"

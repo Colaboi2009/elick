@@ -20,6 +20,8 @@ class SelectionBox {
 	std::weak_ptr<Gate::OutputNode> m_selectedOutputNode;
 	std::weak_ptr<Gate::InputNode> m_selectedInputNode;
 
+	bool m_nodeDetected = false;
+
 	// funcs
 
 	// returns whether or not a node was detected
@@ -52,6 +54,8 @@ class SelectionBox {
     bool selecting() const { return m_selecting; }
 	std::vector<std::weak_ptr<Gate>> &selected() { return m_selection; }
 	bool contains(std::weak_ptr<Gate>);
+	bool nodeDetectedAtMouse() const { return m_nodeDetected; }
+
 	void addToSelection(std::vector<std::weak_ptr<Gate>>);
 
 	void update(SDL_Event);

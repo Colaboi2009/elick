@@ -27,33 +27,31 @@ void GateAdder::update(SDL_Event e) {
     }
 
     if (e.type == SDL_EVENT_KEY_DOWN) {
-        switch (e.key.key) {
-            case SDLK_BACKSPACE: {
-                if (m_inputText.size() > 0) {
-                    m_inputText.pop_back();
-                }
-                updatePossibleGateList();
-            } break;
-            case SDLK_ESCAPE: {
+        if (PRESSED("backspace")) {
+            if (m_inputText.size() > 0) {
+                m_inputText.pop_back();
+            }
+            updatePossibleGateList();
+        }
+        if (PRESSED("escape")) {
+            end();
+        }
+        if (PRESSED("up")) {
+            m_selectedIndex--;
+            if (m_selectedIndex < 0) {
+                m_selectedIndex = m_possibleGates.size() - 1;
+            }
+        }
+        if (PRESSED("down")) {
+            m_selectedIndex++;
+            m_selectedIndex %= m_possibleGates.size();
+        }
+        if (PRESSED("return")) {
+            std::string gateName = m_selectedIndex == -1 ? m_inputText : m_possibleGates[m_selectedIndex];
+            if (g_context.gateTypeWithNameExists(gateName)) {
                 end();
-            } break;
-            case SDLK_UP: {
-                m_selectedIndex--;
-                if (m_selectedIndex < 0) {
-                    m_selectedIndex = m_possibleGates.size() - 1;
-                }
-            } break;
-            case SDLK_DOWN: {
-                m_selectedIndex++;
-                m_selectedIndex %= m_possibleGates.size();
-            } break;
-            case SDLK_RETURN: {
-                std::string gateName = m_selectedIndex == -1 ? m_inputText : m_possibleGates[m_selectedIndex];
-                if (g_context.gateTypeWithNameExists(gateName)) {
-                    end();
-                    g_context.makeGate(gateName, g_mousePos);
-                }
-            } break;
+                g_context.makeGate(gateName, g_mousePos);
+            }
         }
     } else if (e.type == SDL_EVENT_TEXT_INPUT) {
         m_inputText += e.text.text;

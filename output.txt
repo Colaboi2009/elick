@@ -1,0 +1,161 @@
+CUSTOM GATE: 
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+MADE CUSTOM GATE 
+CUSTOM GATE: WHAT
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+MADE CUSTOM GATE WHAT
+CUSTOM GATE: WHAT
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+MADE CUSTOM GATE WHAT
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+DEBUG INFORMATION FOR CUSTOM GATE WHAT
+input nodes (2)
+	is connected 1
+	connected to Output, with 0 internodes
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (2)
+	is connected 1
+	connected to O
+	is connected 1
+	connected to O
+number of process gates 0
+DEBUG INFORMATION FOR GATE O
+input nodes (1)
+	is connected 1
+	connected to Output, with 0 internodes
+output nodes (1)
+	is connected 0
+CUSTOM GATE: 
+CUSTOM GATE: WHAT
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom I
+looking for gates to outnode
+gate gating gate gated
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+gate in custom O
+looking for gates to outnode
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0
+Looking complete
+MADE CUSTOM GATE WHAT
+gate in custom WHAT
+looking for gates to outnode
+gate gating gate gated
+looking for gates to outnode
+gate gating gate gated
+LOOKING FOR AN OUT NODE TO IN
+IS CONNECTED, ATTEMPTING TO FIND BULLSHIT
+Found CONNECTING TO I ON NODE 0

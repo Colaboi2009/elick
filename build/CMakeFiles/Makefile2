@@ -85,12 +85,12 @@ clean: CMakeFiles/elric.dir/clean
 CMakeFiles/elric.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 "Built target elric"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target elric"
 .PHONY : CMakeFiles/elric.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/elric.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alaam/stuf/elric/build/CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alaam/stuf/elric/build/CMakeFiles 18
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/elric.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alaam/stuf/elric/build/CMakeFiles 0
 .PHONY : CMakeFiles/elric.dir/rule
@@ -102,7 +102,7 @@ elric: CMakeFiles/elric.dir/rule
 # codegen rule for target.
 CMakeFiles/elric.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 "Finished codegen for target elric"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Finished codegen for target elric"
 .PHONY : CMakeFiles/elric.dir/codegen
 
 # clean rule for target.

@@ -34,56 +34,55 @@ void GatePackager::update(SDL_Event e) {
 
     if (e.type == SDL_EVENT_KEY_DOWN) {
         if (!sdl.textInputActive()) {
-            switch (e.key.key) {
-                case SDLK_N: {
-                    sdl.startTextInput();
-                    m_textPurpose = Purpose::NAME;
-                    m_name = "";
-                } break;
-                case SDLK_R: {
-                    sdl.startTextInput();
-                    m_textPurpose = Purpose::RED;
-                    m_color.r = 0;
-                } break;
-                case SDLK_G: {
-                    sdl.startTextInput();
-                    m_textPurpose = Purpose::GREEN;
-                    m_color.g = 0;
-                } break;
-                case SDLK_B: {
-                    sdl.startTextInput();
-                    m_textPurpose = Purpose::BLUE;
-                    m_color.b = 0;
-                } break;
-                case SDLK_C: {
-                    // clear
-                } break;
-                case SDLK_ESCAPE: {
-                    // dont do change
-                } break;
-                case SDLK_Y: {
-					if (!g_context.gateTypeWithNameExists(m_name)) {
-						end();
-					} else {
-						// TODO(ala): warn user about name already existing
-					}
-                } break;
+            if (PRESSED("packager_name")) {
+                sdl.startTextInput();
+                m_textPurpose = Purpose::NAME;
+                m_name = "";
+            }
+            if (PRESSED("packager_red")) {
+                sdl.startTextInput();
+                m_textPurpose = Purpose::RED;
+                m_color.r = 0;
+            }
+            if (PRESSED("packager_green")) {
+                sdl.startTextInput();
+                m_textPurpose = Purpose::GREEN;
+                m_color.g = 0;
+            }
+            if (PRESSED("packager_blue")) {
+                sdl.startTextInput();
+                m_textPurpose = Purpose::BLUE;
+                m_color.b = 0;
+            }
+            if (PRESSED("packager_clear_inputs")) {
+                // clear
+            }
+            if (PRESSED("packager_randomize_colors")) {
+                m_color = {Uint8(rand() % 255), Uint8(rand() % 255), Uint8(rand() % 255)};
+            }
+            if (PRESSED("escape")) {
+                // dont do change
+            }
+            if (PRESSED("packager_accept")) {
+                if (!g_context.gateTypeWithNameExists(m_name)) {
+                    end();
+                } else {
+                    // TODO(ala): warn user about name already existing
+                }
             }
         } else {
-			switch (e.key.key) {
-                case SDLK_BACKSPACE: {
-                    if (m_inputText.size() > 0) {
-                        m_inputText.pop_back();
-                        updateTextInputs();
-                    }
-                } break;
-                case SDLK_RETURN: {
-                    // do change
-                    sdl.stopTextInput();
-                    m_inputText = "";
-                } break;
-			}
-		}
+            if (PRESSED("backspace")) {
+                if (m_inputText.size() > 0) {
+                    m_inputText.pop_back();
+                    updateTextInputs();
+                }
+            }
+            if (PRESSED("return")) {
+                // do change
+                sdl.stopTextInput();
+                m_inputText = "";
+            }
+        }
     } else if (e.type == SDL_EVENT_TEXT_INPUT) {
         m_inputText += e.text.text;
         updateTextInputs();

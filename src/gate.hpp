@@ -98,6 +98,8 @@ class Gate : public std::enable_shared_from_this<Gate> {
     void removeOutputConnection(int i) { m_outputNodes[i]->toGate.reset(); }
     void resetConnections();
 
+	virtual void printDebugInformation();
+
     std::weak_ptr<InputNode> inputNodeOnPos(SDL_FPoint);
     std::weak_ptr<OutputNode> outputNodeOnPos(SDL_FPoint);
     SDL_FPoint getInputNodePos(int i) const { return m_inputNodes[i]->p; }
@@ -176,7 +178,7 @@ class CustomGate : public Gate {
     std::vector<std::shared_ptr<InputGate>> m_inputs;
     std::vector<std::shared_ptr<OutputGate>> m_outputs;
 
-    void create(std::vector<std::weak_ptr<Gate>> &);
+    void create(const std::vector<std::weak_ptr<Gate>> &);
 
   public:
     CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color);
@@ -193,4 +195,6 @@ class CustomGate : public Gate {
 
     void electrify() override;
     std::vector<std::shared_ptr<Gate>> context();
+
+	void printDebugInformation() override;
 };

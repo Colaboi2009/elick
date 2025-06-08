@@ -254,6 +254,26 @@ std::vector<bool> Gate::states() const {
     return states;
 }
 
+void Gate::printDebugInformation() {
+	SDL_Log("DEBUG INFORMATION FOR GATE %s", m_name.c_str());
+	SDL_Log("input nodes (%i)", m_maxInput);
+	for (int i = 0; i < m_maxInput; i++) {
+		auto in = m_inputNodes[i];
+		SDL_Log("\tis connected %b", !in->connected.expired());
+		if (in->connected.lock()) {
+			SDL_Log("\tconnected to %s, with %zu internodes", in->connected.lock()->name.c_str(), in->lineNodes.size());
+		}
+	}
+	SDL_Log("output nodes (%i)", m_maxOutput);
+	for (int i = 0; i < m_maxOutput; i++) {
+		auto on = m_outputNodes[i];
+		SDL_Log("\tis connected %b", !on->toGate.expired());
+		if (on->toGate.lock()) {
+			SDL_Log("\tconnected to %s", on->toGate.lock()->name().c_str());
+		}
+	}
+}
+
 void InputGate::electrify() { m_innerColor = {Uint8(m_outputNodes[0]->state ? 0 : 255), Uint8(m_outputNodes[0]->state ? 255 : 0), 0, 255}; }
 
 void OutputGate::electrify() {
@@ -268,7 +288,7 @@ void NotGate::electrify() { m_outputNodes[0]->state = !m_inputNodes[0]->state();
 CustomGate::CustomGate(std::vector<std::weak_ptr<Gate>> gates, SDL_FPoint pos, std::string name, SDL_Color color) {
     float time = SDL_GetTicks();
     create(gates);
-    SDL_Log("time to make custom gate: %f", (SDL_GetTicks() - time));
+    //SDL_Log("time to make custom gate: %f", (SDL_GetTicks() - time));
 
     m_pos.x = pos.x;
     m_pos.y = pos.y;
@@ -349,7 +369,7 @@ std::vector<std::shared_ptr<Gate>> CustomGate::context() {
     return gates;
 }
 
-void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
+void CustomGate::create(const std::vector<std::weak_ptr<Gate>> &gates) {
     std::vector<std::shared_ptr<Gate>> allGates;
     float totalX = 0;
     float totalY = 0;
@@ -392,9 +412,12 @@ void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
         for (int i = 0; i < g->maxInput(); i++) {
             auto inNode = g->getInputNode(i).lock();
             inNode->owner = g;
-            for (int j = 0; j < gates.size(); j++) {
-                if (!inNode->connected.expired() && inNode->connected.lock()->owner.lock() == gates[j].lock()) {
-                    for (int k = 0; k < gates[i].lock()->maxOutput(); k++) {
+			if (inNode->connected.expired()) {
+				continue;
+			} 
+			for (int j = 0; j < gates.size(); j++) {
+                if (inNode->connected.lock()->owner.lock() == gates[j].lock()) {
+                    for (int k = 0; k < gates[j].lock()->maxOutput(); k++) {
                         if (inNode->connected.lock() == gates[j].lock()->getOutputNode(k).lock()) {
                             inNode->connected = allGates[j]->getOutputNode(k);
                         }
@@ -404,4 +427,25 @@ void CustomGate::create(std::vector<std::weak_ptr<Gate>> &gates) {
         }
         g->pos(g->realpos().x - avX / 2.f + 1920.f / 2.f, g->realpos().y - avY / 2.f + 1080.f / 2.f);
     }
+}
+
+void CustomGate::printDebugInformation() {
+	SDL_Log("DEBUG INFORMATION FOR CUSTOM GATE %s", m_name.c_str());
+	SDL_Log("input nodes (%i)", m_maxInput);
+	for (int i = 0; i < m_maxInput; i++) {
+		auto in = m_inputNodes[i];
+		SDL_Log("\tis connected %b", !in->connected.expired());
+		if (in->connected.lock()) {
+			SDL_Log("\tconnected to %s, with %zu internodes", in->connected.lock()->name.c_str(), in->lineNodes.size());
+		}
+	}
+	SDL_Log("output nodes (%i)", m_maxOutput);
+	for (int i = 0; i < m_maxOutput; i++) {
+		auto on = m_outputNodes[i];
+		SDL_Log("\tis connected %b", !on->toGate.expired());
+		if (on->toGate.lock()) {
+			SDL_Log("\tconnected to %s", on->toGate.lock()->name().c_str());
+		}
+	}
+	SDL_Log("number of process gates %zu", m_gates.size());
 }

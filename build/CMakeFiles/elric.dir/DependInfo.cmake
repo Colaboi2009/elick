@@ -20,6 +20,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alaam/stuf/elric/src/gate_adder.cpp" "CMakeFiles/elric.dir/src/gate_adder.cpp.o" "gcc" "CMakeFiles/elric.dir/src/gate_adder.cpp.o.d"
   "/home/alaam/stuf/elric/src/gate_packager.cpp" "CMakeFiles/elric.dir/src/gate_packager.cpp.o" "gcc" "CMakeFiles/elric.dir/src/gate_packager.cpp.o.d"
   "/home/alaam/stuf/elric/src/helper.cpp" "CMakeFiles/elric.dir/src/helper.cpp.o" "gcc" "CMakeFiles/elric.dir/src/helper.cpp.o.d"
+  "/home/alaam/stuf/elric/src/keybind_parser.cpp" "CMakeFiles/elric.dir/src/keybind_parser.cpp.o" "gcc" "CMakeFiles/elric.dir/src/keybind_parser.cpp.o.d"
   "/home/alaam/stuf/elric/src/main.cpp" "CMakeFiles/elric.dir/src/main.cpp.o" "gcc" "CMakeFiles/elric.dir/src/main.cpp.o.d"
   "/home/alaam/stuf/elric/src/saver.cpp" "CMakeFiles/elric.dir/src/saver.cpp.o" "gcc" "CMakeFiles/elric.dir/src/saver.cpp.o.d"
   "/home/alaam/stuf/elric/src/selection_box.cpp" "CMakeFiles/elric.dir/src/selection_box.cpp.o" "gcc" "CMakeFiles/elric.dir/src/selection_box.cpp.o.d"

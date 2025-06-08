@@ -14,6 +14,7 @@ elric: \
   CMakeFiles/elric.dir/src/gate_adder.cpp.o \
   CMakeFiles/elric.dir/src/gate_packager.cpp.o \
   CMakeFiles/elric.dir/src/helper.cpp.o \
+  CMakeFiles/elric.dir/src/keybind_parser.cpp.o \
   CMakeFiles/elric.dir/src/main.cpp.o \
   CMakeFiles/elric.dir/src/saver.cpp.o \
   CMakeFiles/elric.dir/src/selection_box.cpp.o \
@@ -96,6 +97,8 @@ CMakeFiles/elric.dir/src/gate_adder.cpp.o:
 CMakeFiles/elric.dir/src/gate_packager.cpp.o:
 
 CMakeFiles/elric.dir/src/helper.cpp.o:
+
+CMakeFiles/elric.dir/src/keybind_parser.cpp.o:
 
 CMakeFiles/elric.dir/src/main.cpp.o:
 

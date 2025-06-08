@@ -12,14 +12,14 @@ void SelectionBox::update(SDL_Event e) {
     if (e.type == SDL_EVENT_MOUSE_BUTTON_DOWN && SDL_GetMouseState(NULL, NULL) == SDL_BUTTON_LEFT) {
         auto mouseGate = g_context.getGateAt(g_mousePos);
 
-		bool nodeDetected = false;
+        m_nodeDetected = false;
         if (!mouseGate.expired()) {
-			nodeDetected = handleNodeDraggingDetection(mouseGate);
-            if (!nodeDetected) {
+            m_nodeDetected = handleNodeDraggingDetection(mouseGate);
+            if (!m_nodeDetected) {
                 handleGateDraggingDetection(mouseGate);
             }
         }
-        if (m_draggingNode && !nodeDetected) {
+        if (m_draggingNode && !m_nodeDetected) {
             m_nodeLines.push_back(m_finalNodeDraggingPosition);
         }
 
@@ -32,28 +32,29 @@ void SelectionBox::update(SDL_Event e) {
             end();
         }
     } else if (e.type == SDL_EVENT_KEY_DOWN && m_selection.size() > 0) {
-        switch (e.key.key) {
-            case ck_copy: copySelection(); break;
-            case ck_paste: pasteSelected(); break;
-            case ck_duplicate_gate: duplicateSelection(); break;
-            case ck_delete_gate: deleteSelection(); break;
-            case ck_package_gates: packageSelection(); break;
-            case ck_equalize_horizontal_distance: equalizeDistHor(); break;
-            case ck_align_vertically: equalizeDistVer();
-            case ck_straighten_selection: straightenSelectionWithSelectionAxis(); break;
-            case ck_edit_packaged_gate: editGate(); break;
-        }
+        // clang-format off
+		if (PRESSED("copy")) copySelection();
+		if (PRESSED("paste")) pasteSelected();
+		if (PRESSED("duplicate_gate")) duplicateSelection();
+		if (PRESSED("delete_gate")) deleteSelection();
+		if (PRESSED("package_gates")) packageSelection();
+		if (PRESSED("equalize_horizontal_distance")) equalizeDistHor();
+		if (PRESSED("align_vertically")) equalizeDistVer();
+		if (PRESSED("straighten_selection")) straightenSelectionWithSelectionAxis();
+		if (PRESSED("edit_packaged_gate")) editGate();
+		if (PRESSED("P")) m_selection[0].lock()->printDebugInformation();
+        // clang-format on
     }
 
     if (e.type == SDL_EVENT_KEY_DOWN && m_draggingNode) {
-        switch (e.key.key) {
-            case ck_escape: cancelNodeDragging(); break;
-            case ck_align_node_line_with_axis: alignNodeLineWithAxis(); break;
-        }
+        // clang-format off
+		if (PRESSED("escape")) cancelNodeDragging();
+		if (PRESSED("align_node_line_with_axis")) alignNodeLineWithAxis();
+		// clang-format on
     } else if (e.type == SDL_EVENT_KEY_UP && m_draggingNode) {
-		switch (e.key.key) {
-			case ck_align_node_line_with_axis: m_alignNodeLineWithAxis = false; break;
-		}
+		// clang-format off
+		if (PRESSED("align_node_line_with_axis")) m_alignNodeLineWithAxis = false;
+		// clang-format on
 	}
 }
 

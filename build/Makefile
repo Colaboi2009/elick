@@ -417,6 +417,30 @@ src/helper.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/src/helper.cpp.s
 .PHONY : src/helper.cpp.s
 
+src/keybind_parser.o: src/keybind_parser.cpp.o
+.PHONY : src/keybind_parser.o
+
+# target to build an object file
+src/keybind_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/src/keybind_parser.cpp.o
+.PHONY : src/keybind_parser.cpp.o
+
+src/keybind_parser.i: src/keybind_parser.cpp.i
+.PHONY : src/keybind_parser.i
+
+# target to preprocess a source file
+src/keybind_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/src/keybind_parser.cpp.i
+.PHONY : src/keybind_parser.cpp.i
+
+src/keybind_parser.s: src/keybind_parser.cpp.s
+.PHONY : src/keybind_parser.s
+
+# target to generate assembly for a file
+src/keybind_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/elric.dir/build.make CMakeFiles/elric.dir/src/keybind_parser.cpp.s
+.PHONY : src/keybind_parser.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -558,6 +582,9 @@ help:
 	@echo "... src/helper.o"
 	@echo "... src/helper.i"
 	@echo "... src/helper.s"
+	@echo "... src/keybind_parser.o"
+	@echo "... src/keybind_parser.i"
+	@echo "... src/keybind_parser.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

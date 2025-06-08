@@ -5,9 +5,9 @@
 #include "globals.hpp"
 #include "selection_box.hpp"
 #include "sim_context.hpp"
- #include "saver.hpp"
-#include <algorithm>
-#include <bitset>
+#include "saver.hpp"
+#include "keybind_parser.hpp"
+
 #include <format>
 
 SDL sdl;
@@ -20,6 +20,8 @@ float g_dmouseY;
 
 bool g_uiActive = false;
 
+KeybindParser g_keybinds;
+
 SimContext g_context;
 SelectionBox g_selectionBox;
 GatePackager g_gatePackager;
@@ -27,6 +29,8 @@ GateAdder g_gateAdder;
 
 int main() {
     g_font = TTF_OpenFont("art/fonts/sourcecodevf/sourcecodevf.ttf", 24.);
+
+	g_keybinds.loadKeybinds();
 
 	Saver saver;
 	saver.load();
@@ -59,26 +63,21 @@ int main() {
 				switch (e.type) {
 					case SDL_EVENT_MOUSE_BUTTON_DOWN: {
 						auto mouseFlags = SDL_GetMouseState(NULL, NULL);
-						if (mouseFlags & SDL_BUTTON_LEFT) {
+						if (mouseFlags & SDL_BUTTON_LEFT && !g_selectionBox.nodeDetectedAtMouse()) {
 							if (auto mouseInputGate = std::dynamic_pointer_cast<InputGate>(g_context.getGateAt(g_mousePos).lock())) {
 								mouseInputGate->flip();
 							}
 						}
 					} break;
-					case SDL_EVENT_MOUSE_BUTTON_UP: {
-					} break;
 					case SDL_EVENT_KEY_DOWN: {
-						switch (e.key.key) {
-							case ck_add_gate: {
-								g_gateAdder.begin();
-							} break;
-							case ck_home_pos: { // BACK (home pos)
-								g_context.resetPosition();
-								g_context.resetScale();
-							} break;
-							case SDLK_RETURN: {
-								g_context.endContext();
-							} break;
+						if (g_keybinds.pressed(e, "add_gate")) {
+							g_gateAdder.begin();
+						} else if (g_keybinds.pressed(e, "home_pos")) {
+							g_context.resetPosition();
+							g_context.resetScale();
+						}
+						else if (g_keybinds.pressed(e, "return")) {
+							g_context.endContext();
 						}
 					} break;
 					case SDL_EVENT_MOUSE_WHEEL: {

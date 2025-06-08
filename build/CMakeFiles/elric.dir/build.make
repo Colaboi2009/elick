@@ -240,10 +240,24 @@ CMakeFiles/elric.dir/src/helper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/elric.dir/src/helper.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alaam/stuf/elric/src/helper.cpp -o CMakeFiles/elric.dir/src/helper.cpp.s
 
+CMakeFiles/elric.dir/src/keybind_parser.cpp.o: CMakeFiles/elric.dir/flags.make
+CMakeFiles/elric.dir/src/keybind_parser.cpp.o: /home/alaam/stuf/elric/src/keybind_parser.cpp
+CMakeFiles/elric.dir/src/keybind_parser.cpp.o: CMakeFiles/elric.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/elric.dir/src/keybind_parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/elric.dir/src/keybind_parser.cpp.o -MF CMakeFiles/elric.dir/src/keybind_parser.cpp.o.d -o CMakeFiles/elric.dir/src/keybind_parser.cpp.o -c /home/alaam/stuf/elric/src/keybind_parser.cpp
+
+CMakeFiles/elric.dir/src/keybind_parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/elric.dir/src/keybind_parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alaam/stuf/elric/src/keybind_parser.cpp > CMakeFiles/elric.dir/src/keybind_parser.cpp.i
+
+CMakeFiles/elric.dir/src/keybind_parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/elric.dir/src/keybind_parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alaam/stuf/elric/src/keybind_parser.cpp -o CMakeFiles/elric.dir/src/keybind_parser.cpp.s
+
 CMakeFiles/elric.dir/src/main.cpp.o: CMakeFiles/elric.dir/flags.make
 CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp
 CMakeFiles/elric.dir/src/main.cpp.o: CMakeFiles/elric.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/elric.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/elric.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/elric.dir/src/main.cpp.o -MF CMakeFiles/elric.dir/src/main.cpp.o.d -o CMakeFiles/elric.dir/src/main.cpp.o -c /home/alaam/stuf/elric/src/main.cpp
 
 CMakeFiles/elric.dir/src/main.cpp.i: cmake_force
@@ -257,7 +271,7 @@ CMakeFiles/elric.dir/src/main.cpp.s: cmake_force
 CMakeFiles/elric.dir/src/saver.cpp.o: CMakeFiles/elric.dir/flags.make
 CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp
 CMakeFiles/elric.dir/src/saver.cpp.o: CMakeFiles/elric.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/elric.dir/src/saver.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/elric.dir/src/saver.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/elric.dir/src/saver.cpp.o -MF CMakeFiles/elric.dir/src/saver.cpp.o.d -o CMakeFiles/elric.dir/src/saver.cpp.o -c /home/alaam/stuf/elric/src/saver.cpp
 
 CMakeFiles/elric.dir/src/saver.cpp.i: cmake_force
@@ -271,7 +285,7 @@ CMakeFiles/elric.dir/src/saver.cpp.s: cmake_force
 CMakeFiles/elric.dir/src/selection_box.cpp.o: CMakeFiles/elric.dir/flags.make
 CMakeFiles/elric.dir/src/selection_box.cpp.o: /home/alaam/stuf/elric/src/selection_box.cpp
 CMakeFiles/elric.dir/src/selection_box.cpp.o: CMakeFiles/elric.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/elric.dir/src/selection_box.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/elric.dir/src/selection_box.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/elric.dir/src/selection_box.cpp.o -MF CMakeFiles/elric.dir/src/selection_box.cpp.o.d -o CMakeFiles/elric.dir/src/selection_box.cpp.o -c /home/alaam/stuf/elric/src/selection_box.cpp
 
 CMakeFiles/elric.dir/src/selection_box.cpp.i: cmake_force
@@ -285,7 +299,7 @@ CMakeFiles/elric.dir/src/selection_box.cpp.s: cmake_force
 CMakeFiles/elric.dir/src/sim_context.cpp.o: CMakeFiles/elric.dir/flags.make
 CMakeFiles/elric.dir/src/sim_context.cpp.o: /home/alaam/stuf/elric/src/sim_context.cpp
 CMakeFiles/elric.dir/src/sim_context.cpp.o: CMakeFiles/elric.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/elric.dir/src/sim_context.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/elric.dir/src/sim_context.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/elric.dir/src/sim_context.cpp.o -MF CMakeFiles/elric.dir/src/sim_context.cpp.o.d -o CMakeFiles/elric.dir/src/sim_context.cpp.o -c /home/alaam/stuf/elric/src/sim_context.cpp
 
 CMakeFiles/elric.dir/src/sim_context.cpp.i: cmake_force
@@ -310,6 +324,7 @@ elric_OBJECTS = \
 "CMakeFiles/elric.dir/src/gate_adder.cpp.o" \
 "CMakeFiles/elric.dir/src/gate_packager.cpp.o" \
 "CMakeFiles/elric.dir/src/helper.cpp.o" \
+"CMakeFiles/elric.dir/src/keybind_parser.cpp.o" \
 "CMakeFiles/elric.dir/src/main.cpp.o" \
 "CMakeFiles/elric.dir/src/saver.cpp.o" \
 "CMakeFiles/elric.dir/src/selection_box.cpp.o" \
@@ -330,6 +345,7 @@ elric: CMakeFiles/elric.dir/src/gate.cpp.o
 elric: CMakeFiles/elric.dir/src/gate_adder.cpp.o
 elric: CMakeFiles/elric.dir/src/gate_packager.cpp.o
 elric: CMakeFiles/elric.dir/src/helper.cpp.o
+elric: CMakeFiles/elric.dir/src/keybind_parser.cpp.o
 elric: CMakeFiles/elric.dir/src/main.cpp.o
 elric: CMakeFiles/elric.dir/src/saver.cpp.o
 elric: CMakeFiles/elric.dir/src/selection_box.cpp.o
@@ -337,7 +353,7 @@ elric: CMakeFiles/elric.dir/src/sim_context.cpp.o
 elric: CMakeFiles/elric.dir/build.make
 elric: CMakeFiles/elric.dir/compiler_depend.ts
 elric: CMakeFiles/elric.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable elric"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/alaam/stuf/elric/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable elric"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/elric.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

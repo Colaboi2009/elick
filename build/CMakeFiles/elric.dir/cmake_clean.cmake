@@ -24,6 +24,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/elric.dir/src/gate_packager.cpp.o.d"
   "CMakeFiles/elric.dir/src/helper.cpp.o"
   "CMakeFiles/elric.dir/src/helper.cpp.o.d"
+  "CMakeFiles/elric.dir/src/keybind_parser.cpp.o"
+  "CMakeFiles/elric.dir/src/keybind_parser.cpp.o.d"
   "CMakeFiles/elric.dir/src/main.cpp.o"
   "CMakeFiles/elric.dir/src/main.cpp.o.d"
   "CMakeFiles/elric.dir/src/saver.cpp.o"
