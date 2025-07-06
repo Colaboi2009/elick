@@ -11,6 +11,7 @@ KeybindParser::KeybindParser() {}
 KeybindParser::~KeybindParser() {}
 
 SDL_Keycode KeybindParser::get(std::string name) {
+	SDL_Log("keybind %s", name.c_str());
 	assert(c_keybind_set.contains(name) && "keybind doesn't exit");
 	return m_keybinds[name];
 }

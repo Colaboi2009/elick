@@ -27,6 +27,7 @@ class KeybindParser {
         "align_vertically",
         "delete_gate",
         "add_gate",
+		"duplicate_gate",
         "package_gates",
         "edit_packaged_gate",
         "predict_node",

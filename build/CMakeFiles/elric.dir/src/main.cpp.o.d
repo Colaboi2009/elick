@@ -231,7 +231,6 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
  /home/alaam/stuf/elric/src/gate_adder.hpp \
  /home/alaam/stuf/elric/src/gate_packager.hpp \
  /home/alaam/stuf/elric/src/globals.hpp \
- /home/alaam/stuf/elric/src/keymap.hpp \
  /home/alaam/stuf/elric/src/selection_box.hpp \
  /home/alaam/stuf/elric/src/sim_context.hpp \
  /usr/include/c++/15.1.1/unordered_map \
@@ -246,6 +245,9 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
  /usr/include/c++/15.1.1/array \
  /usr/include/c++/15.1.1/bits/move_only_function.h \
  /usr/include/c++/15.1.1/bits/mofunc_impl.h \
+ /home/alaam/stuf/elric/src/keybind_parser.hpp \
+ /usr/include/c++/15.1.1/unordered_set \
+ /usr/include/c++/15.1.1/bits/unordered_set.h \
  /home/alaam/stuf/elric/src/saver.hpp /usr/include/c++/15.1.1/fstream \
  /usr/include/c++/15.1.1/istream /usr/include/c++/15.1.1/ostream \
  /usr/include/c++/15.1.1/format /usr/include/c++/15.1.1/charconv \
@@ -269,11 +271,4 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
  /usr/include/c++/15.1.1/bits/istream.tcc \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/15.1.1/bits/fstream.tcc \
- /home/alaam/stuf/elric/src/keybind_parser.hpp \
- /usr/include/c++/15.1.1/unordered_set \
- /usr/include/c++/15.1.1/bits/unordered_set.h \
- /usr/include/c++/15.1.1/algorithm \
- /usr/include/c++/15.1.1/bits/ranges_algo.h \
- /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15.1.1/bitset
+ /usr/include/c++/15.1.1/bits/fstream.tcc

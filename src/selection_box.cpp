@@ -42,7 +42,7 @@ void SelectionBox::update(SDL_Event e) {
 		if (PRESSED("align_vertically")) equalizeDistVer();
 		if (PRESSED("straighten_selection")) straightenSelectionWithSelectionAxis();
 		if (PRESSED("edit_packaged_gate")) editGate();
-		if (PRESSED("P")) m_selection[0].lock()->printDebugInformation();
+		//if (PRESSED("P")) m_selection[0].lock()->printDebugInformation();
         // clang-format on
     }
 

@@ -2194,7 +2194,7 @@ CMakeFiles/elric.dir/src/gate.cpp.o: /home/alaam/stuf/elric/src/gate.cpp \
   /home/alaam/stuf/elric/src/gate_packager.hpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/keybind_parser.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -2439,6 +2439,7 @@ CMakeFiles/elric.dir/src/gate.cpp.o: /home/alaam/stuf/elric/src/gate.cpp \
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
   /usr/include/c++/15.1.1/bits/unordered_map.h \
+  /usr/include/c++/15.1.1/bits/unordered_set.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -2488,6 +2489,7 @@ CMakeFiles/elric.dir/src/gate.cpp.o: /home/alaam/stuf/elric/src/gate.cpp \
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
   /usr/include/c++/15.1.1/unordered_map \
+  /usr/include/c++/15.1.1/unordered_set \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
@@ -2550,7 +2552,7 @@ CMakeFiles/elric.dir/src/gate_adder.cpp.o: /home/alaam/stuf/elric/src/gate_adder
   /home/alaam/stuf/elric/src/gate_packager.hpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/keybind_parser.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -2794,6 +2796,7 @@ CMakeFiles/elric.dir/src/gate_adder.cpp.o: /home/alaam/stuf/elric/src/gate_adder
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
   /usr/include/c++/15.1.1/bits/unordered_map.h \
+  /usr/include/c++/15.1.1/bits/unordered_set.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -2842,6 +2845,7 @@ CMakeFiles/elric.dir/src/gate_adder.cpp.o: /home/alaam/stuf/elric/src/gate_adder
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
   /usr/include/c++/15.1.1/unordered_map \
+  /usr/include/c++/15.1.1/unordered_set \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
@@ -2903,7 +2907,7 @@ CMakeFiles/elric.dir/src/gate_packager.cpp.o: /home/alaam/stuf/elric/src/gate_pa
   /home/alaam/stuf/elric/src/gate_packager.hpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/keybind_parser.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -3147,6 +3151,7 @@ CMakeFiles/elric.dir/src/gate_packager.cpp.o: /home/alaam/stuf/elric/src/gate_pa
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
   /usr/include/c++/15.1.1/bits/unordered_map.h \
+  /usr/include/c++/15.1.1/bits/unordered_set.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -3195,6 +3200,7 @@ CMakeFiles/elric.dir/src/gate_packager.cpp.o: /home/alaam/stuf/elric/src/gate_pa
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
   /usr/include/c++/15.1.1/unordered_map \
+  /usr/include/c++/15.1.1/unordered_set \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
@@ -3332,7 +3338,6 @@ CMakeFiles/elric.dir/src/keybind_parser.cpp.o: /home/alaam/stuf/elric/src/keybin
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
   /home/alaam/stuf/elric/src/keybind_parser.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -3712,7 +3717,6 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
   /home/alaam/stuf/elric/src/keybind_parser.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
   /home/alaam/stuf/elric/src/saver.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
@@ -3864,7 +3868,6 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/bits/wctype-wchar.h \
   /usr/include/bits/wordsize.h \
   /usr/include/bits/xopen_lim.h \
-  /usr/include/c++/15.1.1/algorithm \
   /usr/include/c++/15.1.1/array \
   /usr/include/c++/15.1.1/backward/auto_ptr.h \
   /usr/include/c++/15.1.1/backward/binders.h \
@@ -3930,7 +3933,6 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/bits/predefined_ops.h \
   /usr/include/c++/15.1.1/bits/ptr_traits.h \
   /usr/include/c++/15.1.1/bits/range_access.h \
-  /usr/include/c++/15.1.1/bits/ranges_algo.h \
   /usr/include/c++/15.1.1/bits/ranges_algobase.h \
   /usr/include/c++/15.1.1/bits/ranges_base.h \
   /usr/include/c++/15.1.1/bits/ranges_cmp.h \
@@ -3973,7 +3975,6 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/bits/utility.h \
   /usr/include/c++/15.1.1/bits/vector.tcc \
   /usr/include/c++/15.1.1/bits/version.h \
-  /usr/include/c++/15.1.1/bitset \
   /usr/include/c++/15.1.1/cctype \
   /usr/include/c++/15.1.1/cerrno \
   /usr/include/c++/15.1.1/charconv \
@@ -4013,7 +4014,6 @@ CMakeFiles/elric.dir/src/main.cpp.o: /home/alaam/stuf/elric/src/main.cpp \
   /usr/include/c++/15.1.1/optional \
   /usr/include/c++/15.1.1/ostream \
   /usr/include/c++/15.1.1/pstl/execution_defs.h \
-  /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
   /usr/include/c++/15.1.1/pstl/glue_memory_defs.h \
   /usr/include/c++/15.1.1/pstl/pstl_config.h \
   /usr/include/c++/15.1.1/span \
@@ -4093,7 +4093,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /home/alaam/stuf/elric/src/gate_packager.hpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/keybind_parser.hpp \
   /home/alaam/stuf/elric/src/saver.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
@@ -4358,6 +4358,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
   /usr/include/c++/15.1.1/bits/unordered_map.h \
+  /usr/include/c++/15.1.1/bits/unordered_set.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -4429,6 +4430,7 @@ CMakeFiles/elric.dir/src/saver.cpp.o: /home/alaam/stuf/elric/src/saver.cpp \
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
   /usr/include/c++/15.1.1/unordered_map \
+  /usr/include/c++/15.1.1/unordered_set \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
@@ -4496,7 +4498,7 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o: /home/alaam/stuf/elric/src/selecti
   /home/alaam/stuf/elric/src/gate_packager.hpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/keybind_parser.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -4740,6 +4742,7 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o: /home/alaam/stuf/elric/src/selecti
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
   /usr/include/c++/15.1.1/bits/unordered_map.h \
+  /usr/include/c++/15.1.1/bits/unordered_set.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -4788,6 +4791,7 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o: /home/alaam/stuf/elric/src/selecti
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
   /usr/include/c++/15.1.1/unordered_map \
+  /usr/include/c++/15.1.1/unordered_set \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
@@ -4849,7 +4853,7 @@ CMakeFiles/elric.dir/src/sim_context.cpp.o: /home/alaam/stuf/elric/src/sim_conte
   /home/alaam/stuf/elric/src/gate_packager.hpp \
   /home/alaam/stuf/elric/src/globals.hpp \
   /home/alaam/stuf/elric/src/helper.hpp \
-  /home/alaam/stuf/elric/src/keymap.hpp \
+  /home/alaam/stuf/elric/src/keybind_parser.hpp \
   /home/alaam/stuf/elric/src/selection_box.hpp \
   /home/alaam/stuf/elric/src/sim_context.hpp \
   /usr/include/SDL3/SDL.h \
@@ -5093,6 +5097,7 @@ CMakeFiles/elric.dir/src/sim_context.cpp.o: /home/alaam/stuf/elric/src/sim_conte
   /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
   /usr/include/c++/15.1.1/bits/unique_ptr.h \
   /usr/include/c++/15.1.1/bits/unordered_map.h \
+  /usr/include/c++/15.1.1/bits/unordered_set.h \
   /usr/include/c++/15.1.1/bits/uses_allocator.h \
   /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
   /usr/include/c++/15.1.1/bits/utility.h \
@@ -5141,6 +5146,7 @@ CMakeFiles/elric.dir/src/sim_context.cpp.o: /home/alaam/stuf/elric/src/sim_conte
   /usr/include/c++/15.1.1/type_traits \
   /usr/include/c++/15.1.1/typeinfo \
   /usr/include/c++/15.1.1/unordered_map \
+  /usr/include/c++/15.1.1/unordered_set \
   /usr/include/c++/15.1.1/vector \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
@@ -5297,8 +5303,6 @@ CMakeFiles/elric.dir/include/engine/animation.cpp.o:
 
 /home/alaam/stuf/elric/src/saver.cpp:
 
-/usr/include/c++/15.1.1/unordered_set:
-
 /usr/lib/crti.o:
 
 /home/alaam/stuf/elric/src/keybind_parser.cpp:
@@ -5308,6 +5312,8 @@ CMakeFiles/elric.dir/include/engine/animation.cpp.o:
 /home/alaam/stuf/elric/src/gate_packager.cpp:
 
 /home/alaam/stuf/elric/src/gate_adder.hpp:
+
+/usr/include/c++/15.1.1/unordered_set:
 
 /usr/include/c++/15.1.1/unordered_map:
 
@@ -5322,8 +5328,6 @@ CMakeFiles/elric.dir/include/engine/animation.cpp.o:
 /usr/include/c++/15.1.1/algorithm:
 
 /home/alaam/stuf/elric/src/selection_box.hpp:
-
-/home/alaam/stuf/elric/src/keymap.hpp:
 
 /home/alaam/stuf/elric/src/helper.hpp:
 
@@ -5628,8 +5632,6 @@ CMakeFiles/elric.dir/src/selection_box.cpp.o:
 /usr/include/SDL3/SDL_events.h:
 
 /usr/include/bits/types.h:
-
-/usr/include/c++/15.1.1/bitset:
 
 /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/messages_members.h:
 

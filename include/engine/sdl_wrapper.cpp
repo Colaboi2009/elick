@@ -12,7 +12,6 @@ SDL::SDL() {
     SDL_SetRenderVSync(m_renderer, 1);
 
     present();
-    system("hyprctl dispatch togglefloating class:elric");
 }
 
 SDL::~SDL() {

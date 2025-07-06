@@ -1,7 +1,7 @@
 CMakeFiles/elric.dir/src/keybind_parser.cpp.o: \
  /home/alaam/stuf/elric/src/keybind_parser.cpp /usr/include/stdc-predef.h \
  /home/alaam/stuf/elric/src/keybind_parser.hpp \
- /usr/include/SDL3/SDL_keycode.h /usr/include/SDL3/SDL_stdinc.h \
+ /usr/include/SDL3/SDL_events.h /usr/include/SDL3/SDL_stdinc.h \
  /usr/include/SDL3/SDL_platform_defines.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdarg.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
@@ -21,8 +21,22 @@ CMakeFiles/elric.dir/src/keybind_parser.cpp.o: \
  /usr/include/bits/types/mbstate_t.h \
  /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
  /usr/include/bits/types/FILE.h /usr/include/SDL3/SDL_begin_code.h \
- /usr/include/SDL3/SDL_close_code.h /usr/include/SDL3/SDL_scancode.h \
- /usr/include/c++/15.1.1/string \
+ /usr/include/SDL3/SDL_close_code.h /usr/include/SDL3/SDL_audio.h \
+ /usr/include/SDL3/SDL_endian.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/endianness.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
+ /usr/include/SDL3/SDL_error.h /usr/include/SDL3/SDL_mutex.h \
+ /usr/include/SDL3/SDL_atomic.h /usr/include/SDL3/SDL_thread.h \
+ /usr/include/SDL3/SDL_properties.h /usr/include/SDL3/SDL_iostream.h \
+ /usr/include/SDL3/SDL_camera.h /usr/include/SDL3/SDL_pixels.h \
+ /usr/include/SDL3/SDL_surface.h /usr/include/SDL3/SDL_blendmode.h \
+ /usr/include/SDL3/SDL_rect.h /usr/include/SDL3/SDL_gamepad.h \
+ /usr/include/SDL3/SDL_guid.h /usr/include/SDL3/SDL_joystick.h \
+ /usr/include/SDL3/SDL_power.h /usr/include/SDL3/SDL_sensor.h \
+ /usr/include/SDL3/SDL_keyboard.h /usr/include/SDL3/SDL_keycode.h \
+ /usr/include/SDL3/SDL_scancode.h /usr/include/SDL3/SDL_video.h \
+ /usr/include/SDL3/SDL_mouse.h /usr/include/SDL3/SDL_pen.h \
+ /usr/include/SDL3/SDL_touch.h /usr/include/c++/15.1.1/string \
  /usr/include/c++/15.1.1/bits/requires_hosted.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -56,7 +70,6 @@ CMakeFiles/elric.dir/src/keybind_parser.cpp.o: \
  /usr/include/c++/15.1.1/clocale /usr/include/locale.h \
  /usr/include/bits/locale.h /usr/include/c++/15.1.1/iosfwd \
  /usr/include/c++/15.1.1/cctype /usr/include/ctype.h \
- /usr/include/bits/endian.h /usr/include/bits/endianness.h \
  /usr/include/c++/15.1.1/bits/ostream_insert.h \
  /usr/include/c++/15.1.1/bits/cxxabi_forced.h \
  /usr/include/c++/15.1.1/bits/stl_iterator.h \
@@ -90,10 +103,9 @@ CMakeFiles/elric.dir/src/keybind_parser.cpp.o: \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
  /usr/include/sys/types.h /usr/include/bits/types/clock_t.h \
  /usr/include/bits/types/clockid_t.h /usr/include/bits/types/time_t.h \
- /usr/include/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/types/sigset_t.h /usr/include/bits/types/__sigset_t.h \
+ /usr/include/bits/types/timer_t.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/types/sigset_t.h \
+ /usr/include/bits/types/__sigset_t.h \
  /usr/include/bits/types/struct_timeval.h \
  /usr/include/bits/types/struct_timespec.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/thread-shared-types.h \
@@ -129,21 +141,9 @@ CMakeFiles/elric.dir/src/keybind_parser.cpp.o: \
  /home/alaam/stuf/elric/src/globals.hpp \
  /home/alaam/stuf/elric/include/engine/sdl_wrapper.hpp \
  /usr/include/SDL3/SDL.h /usr/include/SDL3/SDL_assert.h \
- /usr/include/SDL3/SDL_asyncio.h /usr/include/SDL3/SDL_atomic.h \
- /usr/include/SDL3/SDL_audio.h /usr/include/SDL3/SDL_endian.h \
- /usr/include/SDL3/SDL_error.h /usr/include/SDL3/SDL_mutex.h \
- /usr/include/SDL3/SDL_thread.h /usr/include/SDL3/SDL_properties.h \
- /usr/include/SDL3/SDL_iostream.h /usr/include/SDL3/SDL_bits.h \
- /usr/include/SDL3/SDL_blendmode.h /usr/include/SDL3/SDL_camera.h \
- /usr/include/SDL3/SDL_pixels.h /usr/include/SDL3/SDL_surface.h \
- /usr/include/SDL3/SDL_rect.h /usr/include/SDL3/SDL_clipboard.h \
- /usr/include/SDL3/SDL_cpuinfo.h /usr/include/SDL3/SDL_dialog.h \
- /usr/include/SDL3/SDL_video.h /usr/include/SDL3/SDL_events.h \
- /usr/include/SDL3/SDL_gamepad.h /usr/include/SDL3/SDL_guid.h \
- /usr/include/SDL3/SDL_joystick.h /usr/include/SDL3/SDL_power.h \
- /usr/include/SDL3/SDL_sensor.h /usr/include/SDL3/SDL_keyboard.h \
- /usr/include/SDL3/SDL_mouse.h /usr/include/SDL3/SDL_pen.h \
- /usr/include/SDL3/SDL_touch.h /usr/include/SDL3/SDL_filesystem.h \
+ /usr/include/SDL3/SDL_asyncio.h /usr/include/SDL3/SDL_bits.h \
+ /usr/include/SDL3/SDL_clipboard.h /usr/include/SDL3/SDL_cpuinfo.h \
+ /usr/include/SDL3/SDL_dialog.h /usr/include/SDL3/SDL_filesystem.h \
  /usr/include/SDL3/SDL_gpu.h /usr/include/SDL3/SDL_haptic.h \
  /usr/include/SDL3/SDL_hidapi.h /usr/include/SDL3/SDL_hints.h \
  /usr/include/SDL3/SDL_init.h /usr/include/SDL3/SDL_loadso.h \
@@ -240,7 +240,6 @@ CMakeFiles/elric.dir/src/keybind_parser.cpp.o: \
  /home/alaam/stuf/elric/src/gate.hpp \
  /home/alaam/stuf/elric/src/helper.hpp \
  /home/alaam/stuf/elric/src/gate_packager.hpp \
- /home/alaam/stuf/elric/src/keymap.hpp \
  /home/alaam/stuf/elric/src/selection_box.hpp \
  /home/alaam/stuf/elric/src/sim_context.hpp \
  /usr/include/c++/15.1.1/functional \
